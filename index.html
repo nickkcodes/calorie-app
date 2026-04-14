@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calorie Tracker</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>Calorie Tracker</h1>
+            <p class="total-calories">Total: <span id="total">0</span> kcal</p>
+        </div>
+
+        <div class="upload-section">
+            <h2>Add Food</h2>
+            <input type="file" id="food-photo" accept="image/*">
+            <img id="preview" src="" alt="Food preview">
+            <button id="analyze-btn">Analyze Food</button>
+        </div>
+
+        <div class="food-log">
+            <h2>Today's Log</h2>
+            <ul id="log-list">
+
+            </ul>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
