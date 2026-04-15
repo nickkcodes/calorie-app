@@ -1,3 +1,9 @@
+let totalCalories = 0
+let calorieGoal   = 2000
+let glasses       = 0
+let maxGlasses    = 8
+let currentPage   = 0
+
 const slider = document.querySelector('.slider')
 const dot1 = document.getElementById('dot-1')
 const dot2 = document.getElementById('dot-2')
@@ -29,7 +35,8 @@ dot2.addEventListener('click', function() { goToPage(1) })
 
 function goToPage(pageIndex) {
     currentPage = pageIndex
-    slider.style.transform = `translateX(-${pageIndex * 390}px)`
+    const pageWidth = slider.parentElement.offsetWidth
+    slider.style.transform = `translateX(-${pageIndex * pageWidth}px)`
 
     dot1.classList.toggle('active', pageIndex === 0)
     dot2.classList.toggle('active', pageIndex === 1)

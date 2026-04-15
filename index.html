@@ -9,7 +9,7 @@
     <body>
         <div class="app">
 
-            <div class="slider">
+            <div class="slider" id="slider">
 
                 <div class="page" id="page-calories">
                     <h1>Calories</h1>
@@ -33,15 +33,20 @@
                     <button id="add-food-btn">+ Analyze Food</button>
                 </div>
 
-                <div class="water-container">
-                    <div class="water-drop">
-                        <div class="water-fill" id="water-fill"></div>
+                <div class="page" id="page-water">
+                    <h1>Water</h1>
+                
+                    <div class="water-container">
+                        <div class="water-drop">
+                            <div class="water-fill" id="water-fill"></div>
+                        </div>
+                        <p class="water-text"><span id="glasses-drunk">0</span> / 8 glasses</p>
                     </div>
-                    <p class="water-text"><span id="glasses-drunk">0</span> / 8 glasses</p>
+
+                    <button class="water-btn" id="add-water">+ Add Glass</button>
+                    <button class="water-btn secondary" id="remove-water">- Remove Glass</button>
                 </div>
 
-                <button class="water-btn" id="add-water">+ Add Glass</button>
-                <button class="water-btn secondary" id="remove-water">- Remove Glass</button>
             </div>
 
         </div>
