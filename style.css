@@ -152,13 +152,33 @@ button.secondary:hover {
 }
 
 .water-drop {
-    width: 160px;
-    height: 200px;
-    background: #e0f2f1;
-    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    width: 120px;
+    height: 180px;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.bottle-body {
+    width: 100%;
+    height: 100%;
+    background-color: #e3f2fd;
+    border-radius: 15px 15px 40px 40px;
+    border: 4px solid #bbdefb;
     overflow: hidden;
     position: relative;
-    margin-bottom: 16px;
+}
+
+.water-drop::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 20px;
+    background: #bbdefb;
+    border-radius: 5px 5px 0 0;
+    z-index: 1;
 }
 
 .water-fill {
@@ -166,7 +186,7 @@ button.secondary:hover {
     bottom: 0;
     width: 100%;
     height: 0%;
-    background: #4CAF50;
+    background: #2196F3;
     transition: height 0.6s ease;
 }
 
