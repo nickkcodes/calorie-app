@@ -7,24 +7,50 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div class="header">
-            <h1>Calorie Tracker</h1>
-            <p class="total-calories">Total: <span id="total">0</span> kcal</p>
+        <div class="app">
+
+            <div class="slider">
+
+                <div class="page" id="page-calories">
+                    <h1>Calories</h1>
+
+                    <div class="circle-container">
+                        <svg viewBox="0 0 200 200" class="circle-svg">
+                            <circle class="circle-bg" cx="100" cy="100" r="80"/>
+                            <circle class="circle-fill" cx="100" cy="100" r="80" id="calorie-ring"/>
+                        </svg>
+                        <div class="circle-text">
+                            <span id="calories-eaten">0</span>
+                            <small>of <span id="calorie-goal">2000</span> kcal</small>
+                        </div>
+                    </div>
+
+                    <div class="log-section">
+                        <h2>Today's Log</h2>
+                        <ul id="log-list"></ul>
+                    </div>
+
+                    <button id="add-food-btn">+ Analyze Food</button>
+                </div>
+
+                <div class="water-container">
+                    <div class="water-drop">
+                        <div class="water-fill" id="water-fill"></div>
+                    </div>
+                    <p class="water-text"><span id="glasses-drunk">0</span> / 8 glasses</p>
+                </div>
+
+                <button class="water-btn" id="add-water">+ Add Glass</button>
+                <button class="water-btn secondary" id="remove-water">- Remove Glass</button>
+            </div>
+
         </div>
 
-        <div class="upload-section">
-            <h2>Add Food</h2>
-            <input type="file" id="food-photo" accept="image/*">
-            <img id="preview" src="" alt="Food preview">
-            <button id="analyze-btn">Analyze Food</button>
+        <div class="dots">
+            <span class="dot active" id="dot-1"></span>
+            <span class="dot" id="dot-2"></span>
         </div>
 
-        <div class="food-log">
-            <h2>Today's Log</h2>
-            <ul id="log-list">
-
-            </ul>
-        </div>
 
         <script src="script.js"></script>
     </body>
