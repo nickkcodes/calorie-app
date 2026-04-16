@@ -3,13 +3,16 @@ let calorieGoal   = 2000
 let glasses       = 0
 let maxGlasses    = 8
 let currentPage   = 0
+let mealCalories  = { breakfast: 0, lunch: 0, dinner: 0 }
+
+const todayIndex = (new Date().getDay() + 6) % 7
+let weeklyData    = [0, 0, 0, 0, 0, 0, 0]
 
 const slider = document.querySelector('.slider')
 const dot1 = document.getElementById('dot-1')
 const dot2 = document.getElementById('dot-2')
 const calorieRing = document.getElementById('calorie-ring')
 const caloriesEaten = document.getElementById('calories-eaten')
-const loglist = document.getElementById('log-list')
 const addFoodBtn =document.getElementById('add-food-btn')
 const addWaterBtn = document.getElementById('add-water')
 const removeWaterBtn = document.getElementById('remove-water')
@@ -50,13 +53,41 @@ function updateCalorieRing() {
     caloriesEaten.textContent = totalCalories
 }
 
+function updateWeeklyChart() {
+    weeklyData.forEach(function(calories, index) {
+        const bar = document.getElementById('bar-' + index)
+
+        const percent = Math.min((calories / calorieGoal) * 90, 90)
+        bar.style.height = percent + '%'
+
+        if (index === todayIndex) {
+            bar.classList.add('today')
+        }
+    })
+}
+
 function addFoodToLog(foodName, calories) {
+    const meal = getCurrentMeal()
+
     totalCalories += calories
+    mealCalories[meal] += calories
+    weeklyData[todayIndex] += calories
+
     updateCalorieRing()
+    updateWeeklyChart()
+
+    document.getElementById('kcal-' + meal).textContent = mealCalories[meal] + ' kcal'
 
     const item = document.createElement('li')
     item.textContent = foodName + ' — ' + calories + ' kcal'
-    loglist.appendChild(item)
+    document.getElementById('list-' + meal).appendChild(item)
+
+    const list = document.getElementById('list-' + meal)
+    const arrow = document.getElementById('arrow-' + meal)
+    if (!list.classList.contains('open')) {
+        list.classList.add('open')
+        arrow.classList.add('open')
+    }
 }
 
 addFoodBtn.addEventListener('click', function() {
@@ -82,3 +113,18 @@ removeWaterBtn.addEventListener('click', function() {
         updateWater()
     }
 })
+
+function getCurrentMeal() {
+    const hour = new Date().getHours()
+    if (hour < 11) return 'breakfast'
+    if (hour < 16) return 'lunch'
+    return 'dinner'
+}
+
+function toggleMeal(meal) {
+    const list = document.getElementById('list-' + meal)
+    const arrow = document.getElementById('arrow-' + meal)
+    list.classList.toggle('open')
+    arrow.classList.toggle('open')
+}
+updateWeeklyChart()

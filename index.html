@@ -27,7 +27,70 @@
 
                     <div class="log-section">
                         <h2>Today's Log</h2>
-                        <ul id="log-list"></ul>
+
+                        <div class="meal" id="meal-breakfast">
+                            <div class="meal-header" onclick="toggleMeal('breakfast')">
+                                <span>🌅 Breakfast</span>
+                                <span class="meal-kcal" id="kcal-breakfast">0 kcal</span>
+                                <span class="meal-arrow" id="arrow-breakfast">▼</span>
+                            </div>
+                        <ul class="meal-list" id="list-breakfast"></ul>
+                    </div>
+
+                    <div class="meal" id="meal-lunch">
+                        <div class="meal-header" onclick="toggleMeal('lunch')">
+                            <span>🌞 Lunch</span>
+                            <span class="meal-kcal" id="kcal-lunch">0 kcal</span>
+                            <span class="meal-arrow" id="arrow-lunch">▼</span>
+                        </div>
+                        <ul class="meal-list" id="list-lunch"></ul>
+                    </div>
+
+                    <div class="meal" id="meal-dinner">
+                        <div class="meal-header" onclick="toggleMeal('dinner')">
+                            <span>🌙 Dinner</span>
+                            <span class="meal-kcal" id="kcal-dinner">0 kcal</span>
+                            <span class="meal-arrow" id="arrow-dinner">▼</span>
+                        </div>
+                        <ul class="meal-list" id="list-dinner"></ul>
+                    </div>
+                </div>
+
+                    <div class="weekly-chart">
+                        <h2>This Week</h2>
+                        <div class="chart-area">
+                            <div class="goal-line"></div>
+                            <div class="bars" id="bars">
+                                <div class="bar-group">
+                                    <div class="bar" id="bar-0"></div>
+                                    <span>Mon</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" id="bar-1"></div>
+                                    <span>Tue</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" id="bar-2"></div>
+                                    <span>Wed</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" id="bar-3"></div>
+                                    <span>Thu</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" id="bar-4"></div>
+                                    <span>Fri</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" id="bar-5"></div>
+                                    <span>Sat</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" id="bar-6"></div>
+                                    <span>Sun</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <button id="add-food-btn">+ Analyze Food</button>
