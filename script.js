@@ -11,6 +11,7 @@ let weeklyData    = [0, 0, 0, 0, 0, 0, 0]
 const slider = document.querySelector('.slider')
 const dot1 = document.getElementById('dot-1')
 const dot2 = document.getElementById('dot-2')
+const dot3 = document.getElementById('dot-3')
 const calorieRing = document.getElementById('calorie-ring')
 const caloriesEaten = document.getElementById('calories-eaten')
 const addFoodBtn =document.getElementById('add-food-btn')
@@ -29,12 +30,13 @@ slider.addEventListener('touchend', function(e) {
     const endX = e.changedTouches[0].clientX
     const diff = startX - endX
 
-    if (diff > 50) goToPage(1)
-    if (diff < -50) goToPage(0)
+    if (diff > 50 && currentPage < 2) goToPage(currentPage + 1)
+    if (diff < -50 && currentPage > 0) goToPage(currentPage - 1)
 })
 
 dot1.addEventListener('click', function() { goToPage(0) })
 dot2.addEventListener('click', function() { goToPage(1) })
+dot3.addEventListener('click', function() { goToPage(2) })
 
 function goToPage(pageIndex) {
     currentPage = pageIndex
@@ -43,6 +45,7 @@ function goToPage(pageIndex) {
 
     dot1.classList.toggle('active', pageIndex === 0)
     dot2.classList.toggle('active', pageIndex === 1)
+    dot3.classList.toggle('active', pageIndex === 2)
 }
 
 function updateCalorieRing() {
