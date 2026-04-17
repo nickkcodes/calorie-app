@@ -19,6 +19,8 @@ const addWaterBtn = document.getElementById('add-water')
 const removeWaterBtn = document.getElementById('remove-water')
 const waterFill = document.getElementById('water-fill')
 const glassesDrunk = document.getElementById('glasses-drunk')
+const pandaMouth = document.getElementById('panda-mouth')
+const floatingHeart = document.getElementById('floating-heart')
 
 let startX = 0
 
@@ -101,12 +103,22 @@ function updateWater() {
     glassesDrunk.textContent = glasses
     const percent = (glasses / maxGlasses) * 100
     waterFill.style.height = percent + '%'
+
+    if (glasses === maxGlasses) {
+        pandaMouth.classList.add('smile')
+    } else {
+        pandaMouth.classList.remove('smile')
+    }
 }
 
 addWaterBtn.addEventListener('click', function() {
     if (glasses < maxGlasses) {
         glasses++
         updateWater()
+
+        floatingHeart.classList.remove('animate-heart')
+        void floatingHeart.offsetWidth
+        floatingHeart.classList.add('animate-heart')
     }
 })
 
