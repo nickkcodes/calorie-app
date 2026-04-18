@@ -107,22 +107,23 @@
                     <h1>Water Intake</h1>
                 
                     <div class="water-container">
-                        <div class="floating-heart" id="floating-heart">❤️</div>
-
-                        <div class="panda-wrapper">
-                            <div class="panda-ear left"></div>
-                            <div class="panda-ear right"></div>
-
-                            <div class="panda-body">
-                                <div class="water-fill" id="water-fill"></div>
-
-                                <div class="panda-face">
-                                    <div class="panda-eye left"><div class="pupil"></div></div>
-                                    <div class="panda-eye right"><div class="pupil"></div></div>
-                                    <div class="panda-mouth" id="panda-mouth"></div>
-                                </div>
-                            </div>
+                        <div  class="bottle-wrap">
+                            <div class="hearts-container" id="hearts-container"></div>
+                            <svg viewBox="0 0 120 160" width="160" height="200" xmlns="http://www.w3.org/2000/svg">
+                                
+                                <rect x="30" y="30" width="40" height="8" rx="4" fill="#4CAF50"/>
+                                <!-- Bottle body outline -->
+                                <rect x="15" y="36" width="70" height="110" rx="22" fill="white" stroke="#e0e0e0" stroke-width="3"/>
+                                <!-- Water fill -->
+                                <clipPath id="bottle-clip">
+                                    <rect x="15" y="36" width="70" height="110" rx="22"/>
+                                </clipPath>
+                                <rect x="15" y="146" width="70" height="0" rx="0" fill="#4CAF50" opacity="0.7" id="panda-water-fill" clip-path="url(#bottle-clip)"/>
+                                <!-- Shine -->
+                                <rect x="22" y="45" width="8" height="40" rx="4" fill="white" opacity="0.5"/>
+                            </svg>
                         </div>
+
                         <p class="water-text"><span id="glasses-drunk">0</span> / 8 glasses</p>
                     </div>
 
@@ -130,8 +131,7 @@
                     <button class="water-btn secondary" id="remove-water">- Remove Glass</button>
                 </div>
 
-            </div>
-                    <div class="page" id="page-meals">
+                <div class="page" id="page-meals">
                         <h1>Meal</h1>
 
                         <div class="macro-chart">
@@ -169,7 +169,8 @@
                             </div>
                         </div>
                     </div>
+            </div>
 
         <script src="script.js"></script>
     </body>
-</html>
+</html> 

@@ -17,10 +17,7 @@ const caloriesEaten = document.getElementById('calories-eaten')
 const addFoodBtn =document.getElementById('add-food-btn')
 const addWaterBtn = document.getElementById('add-water')
 const removeWaterBtn = document.getElementById('remove-water')
-const waterFill = document.getElementById('water-fill')
 const glassesDrunk = document.getElementById('glasses-drunk')
-const pandaMouth = document.getElementById('panda-mouth')
-const floatingHeart = document.getElementById('floating-heart')
 
 let startX = 0
 
@@ -102,12 +99,34 @@ addFoodBtn.addEventListener('click', function() {
 function updateWater() {
     glassesDrunk.textContent = glasses
     const percent = (glasses / maxGlasses) * 100
-    waterFill.style.height = percent + '%'
 
-    if (glasses === maxGlasses) {
-        pandaMouth.classList.add('smile')
-    } else {
-        pandaMouth.classList.remove('smile')
+    const maxHeight = 110
+    const fillHeight = (maxHeight * percent) / 100
+    const fillY = 146 - fillHeight
+    const fill = document.getElementById('panda-water-fill')
+    fill.setAttribute('y', fillY)
+    fill.setAttribute('height', fillHeight)
+
+
+    spawnHearts(glasses === maxGlasses)
+}
+
+function spawnHearts(isFull) {
+    const container = document.getElementById('hearts-container')
+    const count = isFull ? 8 : 1
+    for (let i = 0; i < count; i++) {
+        setTimeout(function() {
+            const heart = document.createElement('span')
+            heart.textContent = '❤️'
+            heart.classList.add('heart')
+            if (isFull) heart.classList.add('heart-burst')
+            // random horizontal position
+            heart.style.left = (20 + Math.random() * 60) + '%'
+            heart.style.animationDelay = (Math.random() * 0.3) + 's'
+            container.appendChild(heart)
+            // remove after animation
+            setTimeout(function() { heart.remove() }, 1500)
+        }, i * 100)
     }
 }
 
@@ -115,10 +134,6 @@ addWaterBtn.addEventListener('click', function() {
     if (glasses < maxGlasses) {
         glasses++
         updateWater()
-
-        floatingHeart.classList.remove('animate-heart')
-        void floatingHeart.offsetWidth
-        floatingHeart.classList.add('animate-heart')
     }
 })
 

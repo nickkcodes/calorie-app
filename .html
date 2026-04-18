@@ -1,0 +1,34 @@
+function updateWater() {
+    glassesDrunk.textContent = glasses
+    const percent = (glasses / maxGlasses) * 100
+
+    const maxHeight = 110
+    const fillHeight = (maxHeight * percent) / 100
+    const fillY = 146 - fillHeight
+    const fill = document.getElementById('panda-water-fill')
+    fill.setAttribute('y', fillY)
+    fill.setAttribute('height', fillHeight)
+
+    document.getElementById('bottle-label').textContent = glasses + ' / 8'
+
+    spawnHearts(glasses === maxGlasses)
+}
+
+function spawnHearts(isFull) {
+    const container = document.getElementById('hearts-container')
+    const count = isFull ? 8 : 1
+    for (let i = 0; i < count; i++) {
+        setTimeout(function() {
+            const heart = document.createElement('span')
+            heart.textContent = '💚'
+            heart.classList.add('heart')
+            if (isFull) heart.classList.add('heart-burst')
+            // random horizontal position
+            heart.style.left = (20 + Math.random() * 60) + '%'
+            heart.style.animationDelay = (Math.random() * 0.3) + 's'
+            container.appendChild(heart)
+            // remove after animation
+            setTimeout(function() { heart.remove() }, 1500)
+        }, i * 100)
+    }
+}
