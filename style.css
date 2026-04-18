@@ -439,3 +439,116 @@ button.secondary:hover {
     animation: floatHeart 1.2s ease-out forwards;
 }
 
+.panda-wrapper {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.panda-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    transition: transform 0.3s ease;
+}
+
+.panda-img.happy {
+    animation: pandaHappy 0.8s ease forwards;
+}
+
+@keyframes pandaHappy {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); }
+    25%  { transform: translateY(-30px) rotate(180deg) scale(1.2); }
+    50%  { transform: translateY(-50px) rotate(360deg) scale(1.3); }
+    75%  { transform: translateY(-20px) rotate(360deg) scale(1.1); }
+    100% { transform: translateY(0) rotate(360deg) scale(1); }
+}
+
+.star {
+    position: absolute;
+    font-size: 18px;
+    animation: starBurst 1s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes starBurst {
+    0%   { opacity: 1; transform: translate(0, 0) scale(0.5); }
+    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1.2); }
+}
+
+.panda-fill-wrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.panda-gray {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.4);
+}
+
+.panda-color-clip {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 0%;
+    overflow: hidden;
+    transition: height 0.8s ease;
+}
+
+.panda-color {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 220%;
+    object-fit: contain;
+}
+
+.wave-wrap {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 200%;
+    height: 30px;
+    overflow: hidden;
+    transition: bottom 0.8s ease;
+}
+
+.wave-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.wave-parallax use {
+    animation: waveMove 2.5s linear infinite;
+}
+
+.wave-parallax use:nth-child(2) {
+    animation-duration: 3.5s;
+    animation-direction: reverse;
+}
+
+@keyframes waveMove {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); } 
+}
+
+.panda-color.happy {
+    animation: pandaSpin 0.8s ease forwards;
+}
+
+@keyframes pandaSpin {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); }
+    25%  { transform: translateY(-20px)  rotate(180deg) scale(1.2); }
+    50%  { transform: translateY(-35px) rotate(360deg) scale(1.3); }
+    75%  { transform: translateY(-10px) rotate(360deg) scale(1.05); }
+    100% { transform: translateY(0) rotate(360deg) scale(1); }
+}

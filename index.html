@@ -106,29 +106,32 @@
                 <div class="page" id="page-water">
                     <h1>Water Intake</h1>
                 
-                    <div class="water-container">
-                        <div  class="bottle-wrap">
-                            <div class="hearts-container" id="hearts-container"></div>
-                            <svg viewBox="0 0 120 160" width="160" height="200" xmlns="http://www.w3.org/2000/svg">
-                                
-                                <rect x="30" y="30" width="40" height="8" rx="4" fill="#4CAF50"/>
-                                <!-- Bottle body outline -->
-                                <rect x="15" y="36" width="70" height="110" rx="22" fill="white" stroke="#e0e0e0" stroke-width="3"/>
-                                <!-- Water fill -->
-                                <clipPath id="bottle-clip">
-                                    <rect x="15" y="36" width="70" height="110" rx="22"/>
-                                </clipPath>
-                                <rect x="15" y="146" width="70" height="0" rx="0" fill="#4CAF50" opacity="0.7" id="panda-water-fill" clip-path="url(#bottle-clip)"/>
-                                <!-- Shine -->
-                                <rect x="22" y="45" width="8" height="40" rx="4" fill="white" opacity="0.5"/>
-                            </svg>
-                        </div>
+                    <div class="panda-fill-wrap">
+                        <div class="hearts-container" id="hearts-container"></div>
 
-                        <p class="water-text"><span id="glasses-drunk">0</span> / 8 glasses</p>
+                        <img src="panda.png" class="panda-gray" alt="panda"/>
+
+                        <div class="panda-color-clip" id="panda-color-clip">
+                            <img src="panda.png" class="panda-color" id="panda-color" alt="panda"/>
                     </div>
 
+                        <div class="wave-wrap" id="wave-wrap">
+                            <svg viewBox="0 24 150 28" preserveAspectRatio="none" class="wave-svg">
+                                <defs>
+                                    <path id="wave-path" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/>
+                                </defs>
+                                <g class="wave-parallax">
+                                    <use href="#wave-path" x="48" y="0" fill="rgba(76,175,80,0.4)"/>
+                                    <use href="#wave-path" x="48" y="4" fill="rgba(76,175,80,0.3)"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <p class="water-text"><span id="glasses-drunk">0</span> / 8 glasses</p>
                     <button class="water-btn" id="add-water">+ Add Glass</button>
                     <button class="water-btn secondary" id="remove-water">- Remove Glass</button>
+                    
                 </div>
 
                 <div class="page" id="page-meals">

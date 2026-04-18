@@ -100,33 +100,71 @@ function updateWater() {
     glassesDrunk.textContent = glasses
     const percent = (glasses / maxGlasses) * 100
 
-    const maxHeight = 110
-    const fillHeight = (maxHeight * percent) / 100
-    const fillY = 146 - fillHeight
-    const fill = document.getElementById('panda-water-fill')
-    fill.setAttribute('y', fillY)
-    fill.setAttribute('height', fillHeight)
+    const clip = document.getElementById('panda-color-clip')
+    clip.style.height = percent + '%'
 
+    const waveWrap = document.getElementById('wave-wrap')
+    waveWrap.style.bottom = 'calc(' + percent + '% - 15px)'
 
     spawnHearts(glasses === maxGlasses)
+    if (glasses === maxGlasses) {
+        const pandaColor = document.getElemenById('panda-color')
+        pandaColor.classList.remove('happy')
+        void pandaColor.offsetWidth
+        pandaColor.classList.add('happy')
+
+    }
 }
 
 function spawnHearts(isFull) {
     const container = document.getElementById('hearts-container')
     const count = isFull ? 8 : 1
+
     for (let i = 0; i < count; i++) {
         setTimeout(function() {
             const heart = document.createElement('span')
             heart.textContent = '❤️'
             heart.classList.add('heart')
             if (isFull) heart.classList.add('heart-burst')
-            // random horizontal position
             heart.style.left = (20 + Math.random() * 60) + '%'
             heart.style.animationDelay = (Math.random() * 0.3) + 's'
             container.appendChild(heart)
-            // remove after animation
             setTimeout(function() { heart.remove() }, 1500)
         }, i * 100)
+    }
+
+    if (isFull) {
+        triggerPandaHappy()
+    }
+}
+
+function triggerPandaHappy() {
+    const panda = document.getElementById('panda-img')
+    const container = document.getElementById('hearts-container')
+
+    // spin + jump animation
+    panda.classList.remove('happy')
+    void panda.offsetWidth  
+    panda.classList.add('happy')
+
+    const starEmojis = ['⭐', '✨', '🌟', '💫']
+    for (let i = 0; i < 8; i++) {
+        setTimeout(function() {
+            const star = document.createElement('span')
+            star.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)]
+            star.classList.add('star')
+            // random direction using CSS variables
+            const angle = Math.random() * 360
+            const distance = 60 + Math.random() * 40
+            const tx = Math.cos(angle) * distance + 'px'
+            const ty = Math.sin(angle) * distance + 'px'
+            star.style.setProperty('--tx', tx)
+            star.style.setProperty('--ty', ty)
+            star.style.left = '50%'
+            star.style.top = '30%'
+            container.appendChild(star)
+            setTimeout(function() { star.remove() }, 1200)
+        }, i * 80)
     }
 }
 
