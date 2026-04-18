@@ -1,34 +1,33 @@
-function updateWater() {
-    glassesDrunk.textContent = glasses
-    const percent = (glasses / maxGlasses) * 100
+<div class="panda-mask-wrap">
 
-    const maxHeight = 110
-    const fillHeight = (maxHeight * percent) / 100
-    const fillY = 146 - fillHeight
-    const fill = document.getElementById('panda-water-fill')
-    fill.setAttribute('y', fillY)
-    fill.setAttribute('height', fillHeight)
+    <div class="panda-mask" id="panda-mask">
+        ...
+    </div>
 
-    document.getElementById('bottle-label').textContent = glasses + ' / 8'
+    <!-- panda image overlay on top -->
+    <img src="panda.png" class="panda-overlay" id="panda-overlay" alt="panda"/>
 
-    spawnHearts(glasses === maxGlasses)
+</div>
+
+.panda-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+    /* this makes white areas transparent so fill shows through */
+    mix-blend-mode: multiply;
 }
 
-function spawnHearts(isFull) {
-    const container = document.getElementById('hearts-container')
-    const count = isFull ? 8 : 1
-    for (let i = 0; i < count; i++) {
-        setTimeout(function() {
-            const heart = document.createElement('span')
-            heart.textContent = '💚'
-            heart.classList.add('heart')
-            if (isFull) heart.classList.add('heart-burst')
-            // random horizontal position
-            heart.style.left = (20 + Math.random() * 60) + '%'
-            heart.style.animationDelay = (Math.random() * 0.3) + 's'
-            container.appendChild(heart)
-            // remove after animation
-            setTimeout(function() { heart.remove() }, 1500)
-        }, i * 100)
-    }
+.panda-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+    /* no blend mode */
 }

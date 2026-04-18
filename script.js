@@ -100,19 +100,15 @@ function updateWater() {
     glassesDrunk.textContent = glasses
     const percent = (glasses / maxGlasses) * 100
 
-    const clip = document.getElementById('panda-color-clip')
-    clip.style.height = percent + '%'
+    const water = document.getElementById('panda-water')
+    water.style.height = percent + '%'
 
-    const waveWrap = document.getElementById('wave-wrap')
-    waveWrap.style.bottom = 'calc(' + percent + '% - 15px)'
+    const wave = document.getElementById('panda-wave')
+    wave.style.bottom = 'calc(' + percent + '% - 15px)'
 
     spawnHearts(glasses === maxGlasses)
     if (glasses === maxGlasses) {
-        const pandaColor = document.getElemenById('panda-color')
-        pandaColor.classList.remove('happy')
-        void pandaColor.offsetWidth
-        pandaColor.classList.add('happy')
-
+        triggerPandaHappy()
     }
 }
 
