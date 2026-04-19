@@ -107,9 +107,6 @@ function updateWater() {
     wave.style.bottom = 'calc(' + percent + '% - 15px)'
 
     spawnHearts(glasses === maxGlasses)
-    if (glasses === maxGlasses) {
-        triggerPandaHappy()
-    }
 }
 
 function spawnHearts(isFull) {
@@ -135,7 +132,7 @@ function spawnHearts(isFull) {
 }
 
 function triggerPandaHappy() {
-    const panda = document.getElementById('panda-img')
+    const panda = document.getElementById('panda-mask-wrap')
     const container = document.getElementById('hearts-container')
 
     // spin + jump animation
