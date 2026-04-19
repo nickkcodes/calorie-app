@@ -4,6 +4,9 @@ let glasses       = 0
 let maxGlasses    = 8
 let currentPage   = 0
 let mealCalories  = { breakfast: 0, lunch: 0, dinner: 0 }
+let totalCarbs    = 0
+let totalProtein  = 0
+let totalFat      = 0
 
 const todayIndex = (new Date().getDay() + 6) % 7
 let weeklyData    = [0, 0, 0, 0, 0, 0, 0]
@@ -68,17 +71,50 @@ function updateWeeklyChart() {
     })
 }
 
-function addFoodToLog(foodName, calories) {
+function updatePieChart() {
+    const total = totalCarbs + totalProtein + totalFat
+    if (total === 0) return
+
+    const carbsPercent   = (totalCarbs / total) * 100
+    const proteinPercent = (totalProtein / total) * 100
+    const fatPercent     = (totalFat / total) * 100
+
+    const carbsEl   = document.getElementById('pie-carbs')
+    const proteinEl = document.getElementById('pie-protein')
+    const fatEl     = document.getElementById('pie-fat')
+
+    carbsEl.style.strokeDasharray  = `${carbsPercent} ${100 - carbsPercent}`
+    carbsEl.style.strokeDashoffset = `25`
+
+    proteinEl.style.strokeDasharray  = `${proteinPercent} ${100 - proteinPercent}`
+    proteinEl.style.strokeDashoffset = `${25 - carbsPercent}`
+
+    fatEl.style.strokeDasharray  = `${fatPercent} ${100 - fatPercent}`
+    fatEl.style.strokeDashoffset = `${25 - carbsPercent - proteinPercent}`
+
+    document.getElementById('carbs-g').textContent   = totalCarbs + 'g'
+    document.getElementById('protein-g').textContent = totalProtein + 'g'
+    document.getElementById('fat-g').textContent     = totalFat + 'g'
+}
+
+function addFoodToLog(foodName, calories, carbs, protein, fat) {
     const meal = getCurrentMeal()
+    const detailItem = document.createElement('li')
+    detailItem.textContent = foodName + ' — ' + calories + ' kcal'
+    document.getElementById('detail-' + meal).appendChild(detailItem)
 
     totalCalories += calories
+    totalCarbs    += carbs
+    totalProtein  += protein
+    totalFat      += fat
     mealCalories[meal] += calories
     weeklyData[todayIndex] += calories
 
     updateCalorieRing()
     updateWeeklyChart()
+    updatePieChart()
 
-    document.getElementById('kcal-' + meal).textContent = mealCalories[meal] + ' kcal'
+    document.getElementById('detail-kcal-' + meal).textContent = mealCalories[meal]
 
     const item = document.createElement('li')
     item.textContent = foodName + ' — ' + calories + ' kcal'
@@ -93,7 +129,7 @@ function addFoodToLog(foodName, calories) {
 }
 
 addFoodBtn.addEventListener('click', function() {
-    addFoodToLog('Chicken Rice', 450)
+    addFoodToLog('Chicken Rice', 450, 60, 25, 10)
 })
 
 function updateWater() {
@@ -180,6 +216,9 @@ function getCurrentMeal() {
     if (hour < 11) return 'breakfast'
     if (hour < 16) return 'lunch'
     return 'dinner'
+
+    const dayTotal = document.getElementById('day-total-kcal')
+    if (dayTotal) dayTotal.textContent = totalCalories
 }
 
 function toggleMeal(meal) {
