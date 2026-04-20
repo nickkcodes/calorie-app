@@ -71,30 +71,49 @@ function updateWeeklyChart() {
     })
 }
 
-function updatePieChart() {
-    const total = totalCarbs + totalProtein + totalFat
-    if (total === 0) return
+function updateMacros() {
+    const goals = {
+        carbs: 163,
+        fat: 43,    
+        protein: 65
+    }
 
-    const carbsPercent   = (totalCarbs / total) * 100
-    const proteinPercent = (totalProtein / total) * 100
-    const fatPercent     = (totalFat / total) * 100
+    function updateRing(value, goal, id) {
+        const circle = document.getElementById(id)
+        const percent = Math.min(value / goal, 1)
+        const offset = 314 - (314 * percent)
+        circle.style.strokeDashoffset = offset
+    }
 
-    const carbsEl   = document.getElementById('pie-carbs')
-    const proteinEl = document.getElementById('pie-protein')
-    const fatEl     = document.getElementById('pie-fat')
+    updateRing(totalCarbs, goals.carbs, 'ring-carbs')
+    updateRing(totalFat, goals.fat, 'ring-fat')
+    updateRing(totalProtein, goals.protein, 'ring-protein')
 
-    carbsEl.style.strokeDasharray  = `${carbsPercent} ${100 - carbsPercent}`
-    carbsEl.style.strokeDashoffset = `25`
+    // Update numbers
+    document.getElementById('carbs-g').textContent = totalCarbs
+    document.getElementById('fat-g').textContent = totalFat
+    document.getElementById('protein-g').textContent = totalProtein
 
-    proteinEl.style.strokeDasharray  = `${proteinPercent} ${100 - proteinPercent}`
-    proteinEl.style.strokeDashoffset = `${25 - carbsPercent}`
+    // Prevent negative values
+    document.getElementById('carbs-left').textContent =
+        Math.max(0, goals.carbs - totalCarbs) + 'g left'
 
-    fatEl.style.strokeDasharray  = `${fatPercent} ${100 - fatPercent}`
-    fatEl.style.strokeDashoffset = `${25 - carbsPercent - proteinPercent}`
+    document.getElementById('fat-left').textContent =
+        Math.max(0, goals.fat - totalFat) + 'g left'
 
-    document.getElementById('carbs-g').textContent   = totalCarbs + 'g'
-    document.getElementById('protein-g').textContent = totalProtein + 'g'
-    document.getElementById('fat-g').textContent     = totalFat + 'g'
+    document.getElementById('protein-left').textContent =
+        Math.max(0, goals.protein - totalProtein) + 'g left'
+    document.getElementById('remain-carbs').textContent =
+    Math.max(0, 163 - totalCarbs) + 'g'
+
+    document.getElementById('remain-protein').textContent =
+        Math.max(0, 65 - totalProtein) + 'g'
+    
+    document.getElementById('remain-fat').textContent =
+        Math.max(0, 43 - totalFat) + 'g'
+    
+    document.getElementById('remain-calories').textContent =
+        Math.max(0, calorieGoal - totalCalories)
 }
 
 function addFoodToLog(foodName, calories, carbs, protein, fat) {
@@ -112,7 +131,7 @@ function addFoodToLog(foodName, calories, carbs, protein, fat) {
 
     updateCalorieRing()
     updateWeeklyChart()
-    updatePieChart()
+    updateMacros()
 
     document.getElementById('detail-kcal-' + meal).textContent = mealCalories[meal]
 
@@ -228,3 +247,4 @@ function toggleMeal(meal) {
     arrow.classList.toggle('open')
 }
 updateWeeklyChart()
+updateMacros()

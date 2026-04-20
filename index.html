@@ -93,6 +93,41 @@
                         </div>
                     </div>
 
+                    <div class="daily-summary">
+                        
+                        <h2>Daily Summary</h2>
+
+                        <div class="summary-item">
+                            <span>Status</span>
+                            <b id="day-status">On Track</b>
+                        </div>
+                    
+                        <div class="summary-item">
+                            <span>Calories Left</span>
+                            <b id="calories-left-summary">2000 kcal</b>
+                        </div>
+                    
+                        <div class="summary-item">
+                            <span>Protein</span>
+                            <b id="protein-status">On Track</b>
+                        </div>
+                    
+                        <div class="summary-item">
+                            <span>Carbs</span>
+                            <b id="carbs-status">On Track</b>
+                        </div>
+                    
+                        <div class="summary-item">
+                            <span>Fat</span>
+                            <b id="fat-status">On Track</b>
+                        </div>
+                    
+                        <div class="summary-item">
+                            <span>Water</span>
+                            <b id="water-status">0 / 8</b>
+                        </div>
+                    </div>
+
                     <button id="add-food-btn">+ Analyze Food</button>
                 </div>
 
@@ -126,19 +161,74 @@
                 <div class="page" id="page-meals">
                         <h1>Meal</h1>
 
-                        <div class="macro-chart">
-                            <svg viewBox="0 0 42 42" class="pie-svg" id="pie-chart">
-                                <circle class="pie-bg" cx="21" cy="21" r="15.9"/>
-                                <circle class="pie-fat" cx="21" cy="21" r="15.9" id="pie-fat"/>
-                                <circle class="pie-protein" cx="21" cy="21" r="15.9" id="pie-protein"/>
-                                <circle class="pie-carbs" cx="21" cy="21" r="15.9" id="pie-carbs"/>
-                            </svg>
-                            <div class="macro-legend">
-                                <span class="legend-item carbs">🟡Carbs <b id="carbs-g">0g</b></span>
-                                <span class="legend-item protein">🔴 Protein <b id="protein-g">0g</b></span>
-                                <span class="legend-item fat">🔵 Fat <b id="fat-g">0g</b></span>
+                        <div class="macro-card">
+                            <h2>Macros</h2>
+
+                            <div class="macro-item">
+                                <svg viewBox="0 0 120 120" class="macro-ring">
+                                    <circle cx="60" cy="60" r="50" class="ring-bg"/>
+                                    <circle cx="60" cy="60" r="50" class="ring-fill carbs" id="ring-carbs"/> 
+                                </svg>
+                                <div class="macro-center">
+                                    <span id="carbs-g">0</span>
+                                    <small>/163</small>
+                                </div>
+                                <p>Carbs</p>
+                                <small id="carbs-left">0g left</small>
+                            </div>
+
+                            <div class="macro-item">
+                                <svg viewBox="0 0 120 120" class="macro-ring">
+                                    <circle cx="60" cy="60" r="50" class="ring-bg"/>
+                                    <circle cx="60" cy="60" r="50" class="ring-fill fat" id="ring-fat"/>
+                                </svg>
+                                <div class="macro-center">
+                                    <span id="fat-g">0</span>
+                                    <small>/43g</small>
+                                </div>
+                                <p>Fat</p>
+                                <small id="fat-left">0g left</small>
+                            </div>
+
+                            <div class="macro-item">
+                                <svg viewBox="0 0 120 120" class="macro-ring">
+                                    <circle cx="60" cy="60" r="50" class="ring-bg"/>
+                                    <circle cx="60" cy="60" r="50" class="ring-fill protein" id="ring-protein"/>
+                                </svg>
+                                <div class="macro-center">
+                                    <span id="protein-g">0</span>
+                                    <small>/65g</small>
+                                </div>
+                                <p>Protein</p>
+                                <small id="protein-left">0g left</small>
+                        </div>
+
+                        <div  class="macro-bottom">
+     
+                            <h3>Remaining</h3>
+
+                            <div class="bottom-item">
+                                <span>Carbs</span>
+                                <b id="remain-carbs">0g</b>
+                            </div>
+
+                            <div class="bottom-item">
+                                <span>Protein</span>
+                                <b id="remain-protein">0g</b>
+                            </div>
+
+                            <div class="bottom-item">
+                                <span>Fat</span>
+                                <b id="remain-fat">0g</b>
+                            </div>
+
+                            <div class="bottom-item highlight">
+                                <span>Calories</span>
+                                <b id="remain-calories">0</b>
                             </div>
                         </div>
+                            
+                </div>
 
                         <div class="meals-detail">
 
