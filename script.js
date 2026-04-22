@@ -148,7 +148,7 @@ function addFoodToLog(foodName, calories, carbs, protein, fat) {
 }
 
 addFoodBtn.addEventListener('click', function() {
-    addFoodToLog('Chicken Rice', 450, 60, 25, 10)
+    openScanner()
 })
 
 function updateWater() {
@@ -235,9 +235,6 @@ function getCurrentMeal() {
     if (hour < 11) return 'breakfast'
     if (hour < 16) return 'lunch'
     return 'dinner'
-
-    const dayTotal = document.getElementById('day-total-kcal')
-    if (dayTotal) dayTotal.textContent = totalCalories
 }
 
 function toggleMeal(meal) {
@@ -248,3 +245,129 @@ function toggleMeal(meal) {
 }
 updateWeeklyChart()
 updateMacros()
+
+// ── Scanner ──────────────────────────────
+const GEMINI_API_KEY = 'your-gemini-api-key';
+const GEMINI_MODEL = 'gemini-1.5-flash-latest';
+
+const fabBtn          = document.getElementById('fab-btn')
+const scannerOverlay  = document.getElementById('scanner-overlay')
+const scannerSheet    = document.getElementById('scanner-sheet')
+const closeBtn        = document.getElementById('close-btn')
+const analyzeBtn      = document.getElementById('analyze-btn')
+const logBtn          = document.getElementById('log-btn')
+const cameraBtn       = document.getElementById('camera-btn')
+const cameraInput     = document.getElementById('camera-input')
+const foodInput       = document.getElementById('food-input')
+const resultWrap      = document.getElementById('result-wrap')
+
+let analyzedFood    = null
+let foodImageBase64 = null
+
+function openScanner() {
+    scannerOverlay.classList.add('open')
+    setTimeout(function() { scannerSheet.classList.add('open') }, 10)
+    fabBtn.classList.add('open')
+}
+
+function closeScanner() {
+    scannerSheet.classList.remove('open')
+    setTimeout(function() { scannerOverlay.classList.remove('open') }, 400)
+    fabBtn.classList.remove('open')
+    foodInput.value = ''
+    resultWrap.style.display = 'none'
+    analyzedFood = null
+    foodImageBase64 = null
+    document.getElementById('food-preview').style.display = 'none'
+    document.getElementById('camera-placeholder').style.display = 'flex'
+}
+
+fabBtn.addEventListener('click', openScanner)
+closeBtn.addEventListener('click', closeScanner)
+scannerOverlay.addEventListener('click', function(e) {
+    if (e.target === scannerOverlay) closeScanner()
+})
+
+cameraBtn.addEventListener('click', function() { cameraInput.click() })
+
+cameraInput.addEventListener('change', function(e) {
+    const file = e.target.files[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = function(event) {
+        const base64 = event.target.result
+        foodImageBase64 = base64.split(',')[1]
+        const preview = document.getElementById('food-preview')
+        preview.src = base64
+        preview.style.display = 'block'
+        document.getElementById('camera-placeholder').style.display = 'none'
+    }
+    reader.readAsDataURL(file)
+})
+
+
+analyzeBtn.addEventListener('click', async function() {
+    const text = foodInput.value.trim();
+    if (!text && !foodImageBase64) {
+        alert('Please take a photo or type what you ate!');
+        return;
+    }
+
+    analyzeBtn.textContent = '⏳ Analyzing...';
+    analyzeBtn.disabled = true;
+
+    try {
+        let contents = [];
+        if (foodImageBase64) {
+            contents = [{
+                parts: [
+                    { inline_data: { mime_type: "image/jpeg", data: foodImageBase64 } },
+                    { text: "Analyze this food image. Return ONLY a valid JSON object with keys: name, calories, carbs, protein, fat. All numbers are integers. No other text, just the JSON." }
+                ]
+            }];
+        } else {
+            contents = [{
+                parts: [{ 
+                    text: `Analyze this food: "${text}". Return ONLY a valid JSON object with keys: name, calories, carbs, protein, fat. All numbers are integers. Example: {"name":"Chicken Rice","calories":450,"carbs":60,"protein":25,"fat":10}. No other text.` 
+                }]
+            }];
+        }
+
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: contents })
+        });
+
+        const data = await response.json();
+
+        // 🟢 Detailed Error Logging
+        if (data.error) {
+            console.error("Google API Error:", data.error);
+            if (data.error.status === "PERMISSION_DENIED") {
+                throw new Error("API Key is invalid or restricted. Check Google AI Studio.");
+            }
+            throw new Error(data.error.message);
+        }
+
+        const raw = data.candidates[0].content.parts[0].text;
+        const clean = raw.replace(/```json|```/g, '').trim();
+        analyzedFood = JSON.parse(clean);
+
+        document.getElementById('result-name').textContent    = '🍽️ ' + analyzedFood.name;
+        document.getElementById('result-cal').textContent     = '🔥 ' + analyzedFood.calories + ' kcal';
+        document.getElementById('result-carbs').textContent   = '🟡 ' + analyzedFood.carbs + 'g carbs';
+        document.getElementById('result-protein').textContent = '🔴 ' + analyzedFood.protein + 'g protein';
+        document.getElementById('result-fat').textContent     = '🔵 ' + analyzedFood.fat + 'g fat';
+        resultWrap.style.display = 'flex';
+
+    } catch (err) {
+        alert('Error: ' + err.message);
+        console.error("Full Debug Info:", err);
+    }
+
+    analyzeBtn.textContent = '✨ Analyze Food';
+    analyzeBtn.disabled = false;
+});
