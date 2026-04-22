@@ -90,10 +90,9 @@ function updateMacros() {
     updateRing(totalProtein, goals.protein, 'ring-protein')
 
     // Update numbers
-    document.getElementById('carbs-g').textContent = totalCarbs
-    document.getElementById('fat-g').textContent = totalFat
-    document.getElementById('protein-g').textContent = totalProtein
-
+    document.getElementById('bar-carbs').style.width = Math.min((totalCarbs / 163) * 100, 100) + '%'
+    document.getElementById('bar-protein').style.width = Math.min((totalProtein / 65) * 100, 100) + '%'
+    document.getElementById('bar-fat').style.width = Math.min((totalFat / 43) * 100, 100) + '%'
     // Prevent negative values
     document.getElementById('carbs-left').textContent =
         Math.max(0, goals.carbs - totalCarbs) + 'g left'

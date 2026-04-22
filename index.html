@@ -164,71 +164,78 @@
                         <div class="macro-card">
                             <h2>Macros</h2>
 
-                            <div class="macro-item">
+                            <!-- CARBS -->
+                            <div class="macro-row">
+                            <div class="macro-ring-wrap">
                                 <svg viewBox="0 0 120 120" class="macro-ring">
                                     <circle cx="60" cy="60" r="50" class="ring-bg"/>
-                                    <circle cx="60" cy="60" r="50" class="ring-fill carbs" id="ring-carbs"/> 
+                                    <circle cx="60" cy="60" r="50" class="ring-fill carbs" id="ring-carbs"/>
                                 </svg>
                                 <div class="macro-center">
-                                    <span id="carbs-g">0</span>
-                                    <small>/163</small>
+                                    <span id="carbs-g" style="color:#f9a825">0</span>
                                 </div>
-                                <p>Carbs</p>
-                                <small id="carbs-left">0g left</small>
                             </div>
-
-                            <div class="macro-item">
-                                <svg viewBox="0 0 120 120" class="macro-ring">
-                                    <circle cx="60" cy="60" r="50" class="ring-bg"/>
-                                    <circle cx="60" cy="60" r="50" class="ring-fill fat" id="ring-fat"/>
-                                </svg>
-                                <div class="macro-center">
-                                    <span id="fat-g">0</span>
-                                    <small>/43g</small>
+                            <div class="macro-info">
+                                <div class="macro-name" style="color:#f9a825">🟡 Carbs</div>
+                                <div class="macro-bar-wrap">
+                                    <div class="macro-bar carbs-bar" id="carbs-bar"></div> 
                                 </div>
-                                <p>Fat</p>
-                                <small id="fat-left">0g left</small>
+                                <div class="macro-stats">
+                                    <span id="carbs-left">163g left</span>
+                                    <span class="macro-goal">163g</span>
+                                </div>
                             </div>
-
-                            <div class="macro-item">
+                        </div>
+                            <!-- PROTEIN -->
+                            <div class="macro-row">
+                            <div class="macro-ring-wrap">
                                 <svg viewBox="0 0 120 120" class="macro-ring">
                                     <circle cx="60" cy="60" r="50" class="ring-bg"/>
                                     <circle cx="60" cy="60" r="50" class="ring-fill protein" id="ring-protein"/>
                                 </svg>
                                 <div class="macro-center">
-                                    <span id="protein-g">0</span>
-                                    <small>/65g</small>
+                                    <span id="protein-g" style="color:#4361ee">0</span>
                                 </div>
-                                <p>Protein</p>
-                                <small id="protein-left">0g left</small>
-                        </div>
-
-                        <div  class="macro-bottom">
-     
-                            <h3>Remaining</h3>
-
-                            <div class="bottom-item">
-                                <span>Carbs</span>
-                                <b id="remain-carbs">0g</b>
                             </div>
-
-                            <div class="bottom-item">
-                                <span>Protein</span>
-                                <b id="remain-protein">0g</b>
-                            </div>
-
-                            <div class="bottom-item">
-                                <span>Fat</span>
-                                <b id="remain-fat">0g</b>
-                            </div>
-
-                            <div class="bottom-item highlight">
-                                <span>Calories</span>
-                                <b id="remain-calories">0</b>
+                            <div class="macro-info">
+                                <div class="macro-name" style="color:#4361ee">🔵 Protein</div>
+                                <div class="macro-bar-wrap">
+                                    <div class="macro-bar protein-bar" id="bar-protein"></div>
+                                </div>
+                                <div class="macro-stats">
+                                    <span id="protein-left">65g left</span>
+                                    <span class="macro-goal">/65g</span>
+                                </div>
                             </div>
                         </div>
-                            
-                </div>
+                        <div class="macro-row">
+                            <div class="macro-ring-wrap">
+                                <svg viewBox="0 0 120 120" class="macro-ring">
+                                    <circle circle cx="60" cy="60" r="50" class="ring-bg"/>
+                                    <circle cx="60" cy="60" r="50" class="ring-fill fat" id="ring-fat"/>
+                                </svg>
+                                <div class="macro-center">
+                                    <span id="fat-g" style="color:#e63946">0</span>
+                                </div>
+                            </div>
+                            <div class="macro-info">
+                                <div class="macro-name" style="color:#e63946">🔴 Fat</div>
+                                <div class="macro-bar-wrap">
+                                    <div class="macro-bar fat-bar" id="fat-bar"></div>
+                                </div>
+                                <div class="macro-stats">
+                                    <span id="fat-left">43g left</span>
+                                    <span class="macro-goal">/43g</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="calories-remain">
+                            <span>🔥 Calories Remaining</span>
+                            <p id="remain-calories">200g</p>
+                        </div>
+                        
+                    </div>
 
                         <div class="meals-detail">
 
