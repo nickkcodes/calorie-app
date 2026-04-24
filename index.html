@@ -7,12 +7,12 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <button class="theme-toggle" id="theme-toggle">🌙</button>
         <div class="app">
 
             <div class="slider" id="slider">
 
                 <div class="page" id="page-calories">
-                    <button id="theme-toggle" class="theme-toggle">🌙</button>
                     <h1>Calories</h1>
 
                     <div class="circle-container">
@@ -212,7 +212,7 @@
                         <div class="macro-row">
                             <div class="macro-ring-wrap">
                                 <svg viewBox="0 0 120 120" class="macro-ring">
-                                    <circle circle cx="60" cy="60" r="50" class="ring-bg"/>
+                                    <circle cx="60" cy="60" r="50" class="ring-bg"/>
                                     <circle cx="60" cy="60" r="50" class="ring-fill fat" id="ring-fat"/>
                                 </svg>
                                 <div class="macro-center">
@@ -258,8 +258,7 @@
                                 <p class="meal-total">Total: <span id="detail-kcal-dinner">0</span> kcal</p>
                             </div>
                         </div>
-
-                    </div>
+                </div>
             </div>
             <div class="dots">
                 <span class="dot active" id="dot-1"></span>
@@ -311,4 +310,4 @@
 
         <script src="script.js"></script>
     </body>
-</html> 
+</html>

@@ -1,24 +1,3 @@
-const themeToggle = document.getElementById('theme-toggle');
-
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-}
-
-themeToggle.addEventListener('click', () => {
-    let theme = document.documentElement.getAttribute('data-theme');
-    
-    if (theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-        themeToggle.textContent = '🌙';
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        themeToggle.textContent = '☀️';
-    }
-});
 
 let totalCalories = 0
 let calorieGoal   = 2000
@@ -392,3 +371,45 @@ analyzeBtn.addEventListener('click', async function() {
     analyzeBtn.textContent = '✨ Analyze Food';
     analyzeBtn.disabled = false;
 });
+
+// ── Dark mode ────────────────────────────
+function initDarkMode() {
+    console.log('Dark mode script starting...')
+
+    const themeToggle = document.getElementById('theme-toggle')
+    console.log('Theme toggle element:', themeToggle)
+
+    if (!themeToggle) {
+        console.error('Theme toggle button not found')
+        return
+    }
+
+    console.log('Theme toggle found, setting up dark mode')
+    
+    // Load saved preference on page load
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme === 'dark') {
+        console.log('Applying saved dark mode')
+        document.body.classList.add('dark')
+        themeToggle.textContent = '☀️'
+    }
+
+    // Handle toggle clicks
+    themeToggle.addEventListener('click', function(e) {
+        e.preventDefault()
+        console.log('Theme toggle clicked')
+        document.body.classList.toggle('dark')
+        const isDark = document.body.classList.contains('dark')
+        console.log('Dark mode is now:', isDark)
+        console.log('Body classes:', document.body.className)
+        themeToggle.textContent = isDark ? '☀️' : '🌙'
+        localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    })
+}
+
+// Run when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDarkMode)
+} else {
+    initDarkMode()
+}
