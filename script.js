@@ -1,42 +1,4 @@
-function initDarkMode() {
-    console.log('Dark mode script starting...')
-
-    const themeToggle = document.getElementById('theme-toggle')
-    console.log('Theme toggle element:', themeToggle)
-
-    if (!themeToggle) {
-        console.error('Theme toggle button not found')
-        return
-    }
-
-    console.log('Theme toggle found, setting up dark mode')
-    
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme === 'dark') {
-        console.log('Applying saved dark mode')
-        document.body.classList.add('dark')
-        themeToggle.textContent = '☀️'
-    }
-
-    themeToggle.addEventListener('click', function(e) {
-        e.preventDefault()
-        console.log('Theme toggle clicked')
-        document.body.classList.toggle('dark')
-        const isDark = document.body.classList.contains('dark')
-        console.log('Dark mode is now:', isDark)
-        console.log('Body classes:', document.body.className)
-        themeToggle.textContent = isDark ? '☀️' : '🌙'
-        localStorage.setItem('theme', isDark ? 'dark' : 'light')
-    })
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDarkMode)
-} else {
-    initDarkMode()
-}
-
-
+// ── State ──────────────────────────────────────────────
 let totalCalories = 0
 let calorieGoal   = 2000
 let glasses       = 0
@@ -50,17 +12,19 @@ let totalFat      = 0
 const todayIndex = (new Date().getDay() + 6) % 7
 let weeklyData    = [0, 0, 0, 0, 0, 0, 0]
 
-const slider = document.querySelector('.slider')
-const dot1 = document.getElementById('dot-1')
-const dot2 = document.getElementById('dot-2')
-const dot3 = document.getElementById('dot-3')
-const calorieRing = document.getElementById('calorie-ring')
+// ── DOM refs ───────────────────────────────────────────
+const slider        = document.querySelector('.slider')
+const dot1          = document.getElementById('dot-1')
+const dot2          = document.getElementById('dot-2')
+const dot3          = document.getElementById('dot-3')
+const calorieRing   = document.getElementById('calorie-ring')
 const caloriesEaten = document.getElementById('calories-eaten')
-const addFoodBtn = document.getElementById('add-food-btn')
-const addWaterBtn = document.getElementById('add-water')
-const removeWaterBtn = document.getElementById('remove-water')
-const glassesDrunk = document.getElementById('glasses-drunk')
+const addFoodBtn    = document.getElementById('add-food-btn')
+const addWaterBtn   = document.getElementById('add-water')
+const removeWaterBtn= document.getElementById('remove-water')
+const glassesDrunk  = document.getElementById('glasses-drunk')
 
+// ── Swipe ──────────────────────────────────────────────
 let startX = 0
 
 slider.addEventListener('touchstart', function(e) {
@@ -70,11 +34,11 @@ slider.addEventListener('touchstart', function(e) {
 slider.addEventListener('touchend', function(e) {
     const endX = e.changedTouches[0].clientX
     const diff = startX - endX
-
     if (diff > 50 && currentPage < 2) goToPage(currentPage + 1)
     if (diff < -50 && currentPage > 0) goToPage(currentPage - 1)
 })
 
+// ── Navigation ─────────────────────────────────────────
 dot1.addEventListener('click', function() { goToPage(0) })
 dot2.addEventListener('click', function() { goToPage(1) })
 dot3.addEventListener('click', function() { goToPage(2) })
@@ -83,12 +47,12 @@ function goToPage(pageIndex) {
     currentPage = pageIndex
     const pageWidth = slider.parentElement.offsetWidth
     slider.style.transform = `translateX(-${pageIndex * pageWidth}px)`
-
     dot1.classList.toggle('active', pageIndex === 0)
     dot2.classList.toggle('active', pageIndex === 1)
     dot3.classList.toggle('active', pageIndex === 2)
 }
 
+// ── Calorie ring ───────────────────────────────────────
 function updateCalorieRing() {
     const circumference = 502
     const progress = Math.min(totalCalories / calorieGoal, 1)
@@ -97,68 +61,58 @@ function updateCalorieRing() {
     caloriesEaten.textContent = totalCalories
 }
 
+// ── Weekly chart ───────────────────────────────────────
 function updateWeeklyChart() {
     weeklyData.forEach(function(calories, index) {
         const bar = document.getElementById('bar-' + index)
-
         const percent = Math.min((calories / calorieGoal) * 90, 90)
         bar.style.height = percent + '%'
-
-        if (index === todayIndex) {
-            bar.classList.add('today')
-        }
+        if (index === todayIndex) bar.classList.add('today')
     })
 }
 
+// ── Macros ─────────────────────────────────────────────
 function updateMacros() {
-    const goals = {
-        carbs: 163,
-        fat: 43,    
-        protein: 65
-    }
+    const goals = { carbs: 163, fat: 43, protein: 65 }
 
     function updateRing(value, goal, id) {
         const circle = document.getElementById(id)
+        if (!circle) return
         const percent = Math.min(value / goal, 1)
-        const offset = 314 - (314 * percent)
-        circle.style.strokeDashoffset = offset
+        circle.style.strokeDashoffset = 314 - (314 * percent)
     }
 
     updateRing(totalCarbs, goals.carbs, 'ring-carbs')
     updateRing(totalFat, goals.fat, 'ring-fat')
     updateRing(totalProtein, goals.protein, 'ring-protein')
 
-    // Update numbers
-    document.getElementById('bar-carbs').style.width = Math.min((totalCarbs / 163) * 100, 100) + '%'
-    document.getElementById('bar-protein').style.width = Math.min((totalProtein / 65) * 100, 100) + '%'
-    document.getElementById('bar-fat').style.width = Math.min((totalFat / 43) * 100, 100) + '%'
-    // Prevent negative values
-    document.getElementById('carbs-left').textContent =
-        Math.max(0, goals.carbs - totalCarbs) + 'g left'
+    const carbsBar   = document.getElementById('bar-carbs')
+    const proteinBar = document.getElementById('bar-protein')
+    const fatBar     = document.getElementById('fat-bar')
 
-    document.getElementById('fat-left').textContent =
-        Math.max(0, goals.fat - totalFat) + 'g left'
+    if (carbsBar)   carbsBar.style.width   = Math.min((totalCarbs / 163) * 100, 100) + '%'
+    if (proteinBar) proteinBar.style.width = Math.min((totalProtein / 65) * 100, 100) + '%'
+    if (fatBar)     fatBar.style.width     = Math.min((totalFat / 43) * 100, 100) + '%'
 
-    document.getElementById('protein-left').textContent =
-        Math.max(0, goals.protein - totalProtein) + 'g left'
-    document.getElementById('remain-carbs').textContent =
-    Math.max(0, 163 - totalCarbs) + 'g'
+    const els = {
+        'carbs-left':    Math.max(0, goals.carbs - totalCarbs) + 'g left',
+        'fat-left':      Math.max(0, goals.fat - totalFat) + 'g left',
+        'protein-left':  Math.max(0, goals.protein - totalProtein) + 'g left',
+        'remain-calories': Math.max(0, calorieGoal - totalCalories),
+        'carbs-g':       totalCarbs,
+        'fat-g':         totalFat,
+        'protein-g':     totalProtein
+    }
 
-    document.getElementById('remain-protein').textContent =
-        Math.max(0, 65 - totalProtein) + 'g'
-    
-    document.getElementById('remain-fat').textContent =
-        Math.max(0, 43 - totalFat) + 'g'
-    
-    document.getElementById('remain-calories').textContent =
-        Math.max(0, calorieGoal - totalCalories)
+    Object.entries(els).forEach(function([id, val]) {
+        const el = document.getElementById(id)
+        if (el) el.textContent = val
+    })
 }
 
+// ── Food log ───────────────────────────────────────────
 function addFoodToLog(foodName, calories, carbs, protein, fat) {
     const meal = getCurrentMeal()
-    const detailItem = document.createElement('li')
-    detailItem.textContent = foodName + ' — ' + calories + ' kcal'
-    document.getElementById('detail-' + meal).appendChild(detailItem)
 
     totalCalories += calories
     totalCarbs    += carbs
@@ -171,13 +125,18 @@ function addFoodToLog(foodName, calories, carbs, protein, fat) {
     updateWeeklyChart()
     updateMacros()
 
+    document.getElementById('kcal-' + meal).textContent        = mealCalories[meal] + ' kcal'
     document.getElementById('detail-kcal-' + meal).textContent = mealCalories[meal]
 
     const item = document.createElement('li')
     item.textContent = foodName + ' — ' + calories + ' kcal'
     document.getElementById('list-' + meal).appendChild(item)
 
-    const list = document.getElementById('list-' + meal)
+    const detailItem = document.createElement('li')
+    detailItem.textContent = foodName + ' — ' + calories + ' kcal'
+    document.getElementById('detail-' + meal).appendChild(detailItem)
+
+    const list  = document.getElementById('list-' + meal)
     const arrow = document.getElementById('arrow-' + meal)
     if (!list.classList.contains('open')) {
         list.classList.add('open')
@@ -185,10 +144,23 @@ function addFoodToLog(foodName, calories, carbs, protein, fat) {
     }
 }
 
-addFoodBtn.addEventListener('click', function() {
-    openScanner()
-})
+function getCurrentMeal() {
+    const hour = new Date().getHours()
+    if (hour < 11) return 'breakfast'
+    if (hour < 16) return 'lunch'
+    return 'dinner'
+}
 
+function toggleMeal(meal) {
+    const list  = document.getElementById('list-' + meal)
+    const arrow = document.getElementById('arrow-' + meal)
+    list.classList.toggle('open')
+    arrow.classList.toggle('open')
+}
+
+addFoodBtn.addEventListener('click', function() { openScanner() })
+
+// ── Water ──────────────────────────────────────────────
 function updateWater() {
     glassesDrunk.textContent = glasses
     const percent = (glasses / maxGlasses) * 100
@@ -205,7 +177,6 @@ function updateWater() {
 function spawnHearts(isFull) {
     const container = document.getElementById('hearts-container')
     const count = isFull ? 8 : 1
-
     for (let i = 0; i < count; i++) {
         setTimeout(function() {
             const heart = document.createElement('span')
@@ -218,36 +189,28 @@ function spawnHearts(isFull) {
             setTimeout(function() { heart.remove() }, 1500)
         }, i * 100)
     }
-
-    if (isFull) {
-        triggerPandaHappy()
-    }
+    if (isFull) triggerPandaHappy()
 }
 
 function triggerPandaHappy() {
     const panda = document.getElementById('panda-mask-wrap')
-    const container = document.getElementById('hearts-container')
-
-    // spin + jump animation
     panda.classList.remove('happy')
-    void panda.offsetWidth  
+    void panda.offsetWidth
     panda.classList.add('happy')
 
+    const container  = document.getElementById('hearts-container')
     const starEmojis = ['⭐', '✨', '🌟', '💫']
     for (let i = 0; i < 8; i++) {
         setTimeout(function() {
             const star = document.createElement('span')
             star.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)]
             star.classList.add('star')
-            // random direction using CSS variables
-            const angle = Math.random() * 360
+            const angle    = Math.random() * 360
             const distance = 60 + Math.random() * 40
-            const tx = Math.cos(angle) * distance + 'px'
-            const ty = Math.sin(angle) * distance + 'px'
-            star.style.setProperty('--tx', tx)
-            star.style.setProperty('--ty', ty)
+            star.style.setProperty('--tx', Math.cos(angle) * distance + 'px')
+            star.style.setProperty('--ty', Math.sin(angle) * distance + 'px')
             star.style.left = '50%'
-            star.style.top = '30%'
+            star.style.top  = '30%'
             container.appendChild(star)
             setTimeout(function() { star.remove() }, 1200)
         }, i * 80)
@@ -255,49 +218,30 @@ function triggerPandaHappy() {
 }
 
 addWaterBtn.addEventListener('click', function() {
-    if (glasses < maxGlasses) {
-        glasses++
-        updateWater()
-    }
+    if (glasses < maxGlasses) { glasses++; updateWater() }
 })
 
 removeWaterBtn.addEventListener('click', function() {
-    if (glasses > 0) {
-        glasses--
-        updateWater()
-    }
+    if (glasses > 0) { glasses--; updateWater() }
 })
 
-function getCurrentMeal() {
-    const hour = new Date().getHours()
-    if (hour < 11) return 'breakfast'
-    if (hour < 16) return 'lunch'
-    return 'dinner'
-}
-
-function toggleMeal(meal) {
-    const list = document.getElementById('list-' + meal)
-    const arrow = document.getElementById('arrow-' + meal)
-    list.classList.toggle('open')
-    arrow.classList.toggle('open')
-}
+// ── Init ───────────────────────────────────────────────
 updateWeeklyChart()
 updateMacros()
 
-// ── Scanner ──────────────────────────────
-const GEMINI_API_KEY = 'your-gemini-api-key';
-const GEMINI_MODEL = 'gemini-1.5-flash-latest';
+// ── Scanner ────────────────────────────────────────────
+const GEMINI_API_KEY = 'your-gemini-api-key'
 
-const fabBtn          = document.getElementById('fab-btn')
-const scannerOverlay  = document.getElementById('scanner-overlay')
-const scannerSheet    = document.getElementById('scanner-sheet')
-const closeBtn        = document.getElementById('close-btn')
-const analyzeBtn      = document.getElementById('analyze-btn')
-const logBtn          = document.getElementById('log-btn')
-const cameraBtn       = document.getElementById('camera-btn')
-const cameraInput     = document.getElementById('camera-input')
-const foodInput       = document.getElementById('food-input')
-const resultWrap      = document.getElementById('result-wrap')
+const fabBtn         = document.getElementById('fab-btn')
+const scannerOverlay = document.getElementById('scanner-overlay')
+const scannerSheet   = document.getElementById('scanner-sheet')
+const closeBtn       = document.getElementById('close-btn')
+const analyzeBtn     = document.getElementById('analyze-btn')
+const logBtn         = document.getElementById('log-btn')
+const cameraBtn      = document.getElementById('camera-btn')
+const cameraInput    = document.getElementById('camera-input')
+const foodInput      = document.getElementById('food-input')
+const resultWrap     = document.getElementById('result-wrap')
 
 let analyzedFood    = null
 let foodImageBase64 = null
@@ -312,11 +256,11 @@ function closeScanner() {
     scannerSheet.classList.remove('open')
     setTimeout(function() { scannerOverlay.classList.remove('open') }, 400)
     fabBtn.classList.remove('open')
-    foodInput.value = ''
+    foodInput.value        = ''
     resultWrap.style.display = 'none'
-    analyzedFood = null
+    analyzedFood    = null
     foodImageBase64 = null
-    document.getElementById('food-preview').style.display = 'none'
+    document.getElementById('food-preview').style.display    = 'none'
     document.getElementById('camera-placeholder').style.display = 'flex'
 }
 
@@ -343,69 +287,71 @@ cameraInput.addEventListener('change', function(e) {
     reader.readAsDataURL(file)
 })
 
-
 analyzeBtn.addEventListener('click', async function() {
-    const text = foodInput.value.trim();
+    const text = foodInput.value.trim()
     if (!text && !foodImageBase64) {
-        alert('Please take a photo or type what you ate!');
-        return;
+        alert('Please take a photo or type what you ate!')
+        return
     }
 
-    analyzeBtn.textContent = '⏳ Analyzing...';
-    analyzeBtn.disabled = true;
+    analyzeBtn.textContent = '⏳ Analyzing...'
+    analyzeBtn.disabled    = true
 
     try {
-        let contents = [];
+        let contents = []
         if (foodImageBase64) {
             contents = [{
                 parts: [
-                    { inline_data: { mime_type: "image/jpeg", data: foodImageBase64 } },
-                    { text: "Analyze this food image. Return ONLY a valid JSON object with keys: name, calories, carbs, protein, fat. All numbers are integers. No other text, just the JSON." }
+                    { inline_data: { mime_type: 'image/jpeg', data: foodImageBase64 } },
+                    { text: 'Analyze this food image. Return ONLY a valid JSON object with keys: name, calories, carbs, protein, fat. All numbers are integers. No other text, just the JSON.' }
                 ]
-            }];
+            }]
         } else {
             contents = [{
-                parts: [{ 
-                    text: `Analyze this food: "${text}". Return ONLY a valid JSON object with keys: name, calories, carbs, protein, fat. All numbers are integers. Example: {"name":"Chicken Rice","calories":450,"carbs":60,"protein":25,"fat":10}. No other text.` 
+                parts: [{
+                    text: `Analyze this food: "${text}". Return ONLY a valid JSON object with keys: name, calories, carbs, protein, fat. All numbers are integers. Example: {"name":"Chicken Rice","calories":450,"carbs":60,"protein":25,"fat":10}. No other text.`
                 }]
-            }];
+            }]
         }
 
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-        
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: contents })
-        });
+            body: JSON.stringify({ contents })
+        })
 
-        const data = await response.json();
+        const data = await response.json()
+        if (data.error) throw new Error(data.error.message)
 
-        // 🟢 Detailed Error Logging
-        if (data.error) {
-            console.error("Google API Error:", data.error);
-            if (data.error.status === "PERMISSION_DENIED") {
-                throw new Error("API Key is invalid or restricted. Check Google AI Studio.");
-            }
-            throw new Error(data.error.message);
-        }
+        const raw    = data.candidates[0].content.parts[0].text
+        const clean  = raw.replace(/```json|```/g, '').trim()
+        analyzedFood = JSON.parse(clean)
 
-        const raw = data.candidates[0].content.parts[0].text;
-        const clean = raw.replace(/```json|```/g, '').trim();
-        analyzedFood = JSON.parse(clean);
-
-        document.getElementById('result-name').textContent    = '🍽️ ' + analyzedFood.name;
-        document.getElementById('result-cal').textContent     = '🔥 ' + analyzedFood.calories + ' kcal';
-        document.getElementById('result-carbs').textContent   = '🟡 ' + analyzedFood.carbs + 'g carbs';
-        document.getElementById('result-protein').textContent = '🔴 ' + analyzedFood.protein + 'g protein';
-        document.getElementById('result-fat').textContent     = '🔵 ' + analyzedFood.fat + 'g fat';
-        resultWrap.style.display = 'flex';
+        document.getElementById('result-name').textContent    = '🍽️ ' + analyzedFood.name
+        document.getElementById('result-cal').textContent     = '🔥 ' + analyzedFood.calories + ' kcal'
+        document.getElementById('result-carbs').textContent   = '🟡 ' + analyzedFood.carbs + 'g carbs'
+        document.getElementById('result-protein').textContent = '🔴 ' + analyzedFood.protein + 'g protein'
+        document.getElementById('result-fat').textContent     = '🔵 ' + analyzedFood.fat + 'g fat'
+        resultWrap.style.display = 'flex'
 
     } catch (err) {
-        alert('Error: ' + err.message);
-        console.error("Full Debug Info:", err);
+        alert('Error: ' + err.message)
+        console.error(err)
     }
 
-    analyzeBtn.textContent = '✨ Analyze Food';
-    analyzeBtn.disabled = false;
-});
+    analyzeBtn.textContent = '✨ Analyze Food'
+    analyzeBtn.disabled    = false
+})
+
+logBtn.addEventListener('click', function() {
+    if (!analyzedFood) return
+    addFoodToLog(
+        analyzedFood.name,
+        analyzedFood.calories,
+        analyzedFood.carbs,
+        analyzedFood.protein,
+        analyzedFood.fat
+    )
+    closeScanner()
+})

@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <button class="theme-toggle" id="theme-toggle">🌙</button>
         <div class="app">
 
             <div class="slider" id="slider">
@@ -260,54 +259,49 @@
                         </div>
                 </div>
             </div>
-            <div class="dots">
-                <span class="dot active" id="dot-1"></span>
-                <span class="dot" id="dot-2"></span>
-                <span class="dot" id="dot-3"></span>
-            </div>
-            <button class="fab-btn" id="fab-btn">+</button>
-            <div class="scanner-overlay" id="scanner-overlay">
-            <div class="scanner-sheet" id="scanner-sheet">
-
-                <div class="scanner-handle"></div>
-                <h2 class="scanner-title"> What did you eat?</h2>
-                <div class="camera-wrap" id="camera-wrap">
-                        <div class="camera-placeholder" id="camera-placeholder">
-                            <span>📷</span>
-                            <p>Take a photo of your food</p>
-                        </div>
-                        <img id="food-preview" class="food-preview" style="display:none"/>
-                        <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none"/>
-                        <button class="camera-btn" id="camera-btn">📷 Take Photo</button>
+        </div>
+        <div class="dots">
+            <span class="dot active" id="dot-1"></span>
+            <span class="dot" id="dot-2"></span>
+            <span class="dot" id="dot-3"></span>
+        </div>
+        <button class="fab-btn" id="fab-btn">+</button>
+        <div class="scanner-overlay" id="scanner-overlay">
+        <div class="scanner-sheet" id="scanner-sheet">
+            <div class="scanner-handle"></div>
+            <h2 class="scanner-title"> What did you eat?</h2>
+            <div class="camera-wrap" id="camera-wrap">
+                    <div class="camera-placeholder" id="camera-placeholder">
+                        <span>📷</span>
+                        <p>Take a photo of your food</p>
                     </div>
-
-                    <div class="scanner-divider">
-                        <span>or</span>
-                    </div>
-
-                    <div class="text-wrap">
-                        <input type="text" id="food-input" class="food-input" placeholder="e.g chicken rice, 2 eggs and toast..."/>
-                    </div>
-
-                    <button class="analyze-btn" id="analyze-btn"> Analyze Food</button>
-
-                    <div class="result-wrap" id="result-wrap" style="display:none">
-                        <div class="result-card">
-                            <p class="result-name" id="result-name"></p>
-                            <div class="result-macros">
-                                <span class="result-cal" id="result-cal"></span>
-                                <span class="result-carbs" id="result-carbs"></span>
-                                <span class="result-protein" id="result-protein"></span>
-                                <span class="result-fat" id="result-fat"></span>
-                            </div>
-                        </div>
-                        <button class="log-btn" id="log-btn">Log This Food</button>
-                    </div>
-                    <button class="close-btn" id="close-btn">✕ Close</button>
+                    <img id="food-preview" class="food-preview" style="display:none"/>
+                    <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none"/>
+                    <button class="camera-btn" id="camera-btn">📷 Take Photo</button>
                 </div>
+                <div class="scanner-divider">
+                    <span>or</span>
+                </div>
+                <div class="text-wrap">
+                    <input type="text" id="food-input" class="food-input" placeholder="e.g chicken rice, 2 eggs and toast..."/>
+                </div>
+                <button class="analyze-btn" id="analyze-btn"> Analyze Food</button>
+                <div class="result-wrap" id="result-wrap" style="display:none">
+                    <div class="result-card">
+                        <p class="result-name" id="result-name"></p>
+                        <div class="result-macros">
+                            <span class="result-cal" id="result-cal"></span>
+                            <span class="result-carbs" id="result-carbs"></span>
+                            <span class="result-protein" id="result-protein"></span>
+                            <span class="result-fat" id="result-fat"></span>
+                        </div>
+                    </div>
+                    <button class="log-btn" id="log-btn">Log This Food</button>
+                </div>
+                <button class="close-btn" id="close-btn">✕ Close</button>
             </div>
-            </div>
-
+        </div>
+    
         <script src="script.js"></script>
     </body>
 </html>
