@@ -230,7 +230,7 @@ updateWeeklyChart()
 updateMacros()
 
 // ── Scanner ────────────────────────────────────────────
-const GEMINI_API_KEY = 'your-gemini-api-key'
+const GEMINI_API_KEY = 'AIzaSyCqhcwiWqtrvbqblWWctZNnmkOTgGyrv-Q'
 
 const fabBtn         = document.getElementById('fab-btn')
 const scannerOverlay = document.getElementById('scanner-overlay')
@@ -314,7 +314,8 @@ analyzeBtn.addEventListener('click', async function() {
             }]
         }
 
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`
+        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`
+
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -322,11 +323,21 @@ analyzeBtn.addEventListener('click', async function() {
         })
 
         const data = await response.json()
-        if (data.error) throw new Error(data.error.message)
+        console.log("FULL RESPONSE:", data)
 
-        const raw    = data.candidates[0].content.parts[0].text
-        const clean  = raw.replace(/```json|```/g, '').trim()
-        analyzedFood = JSON.parse(clean)
+        if (!response.ok) {
+            throw new Error(data?.error?.message || "API request failed")
+        }
+
+        const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text
+        if (!raw) throw new Error("No response from AI")
+        
+        const clean = raw.replace(/```json|```/g, '').trim()
+
+        const jsonMatch = clean.match(/\{[\s\S]*\}/)
+        if (!jsonMatch) throw new Error("No JSON found")
+        
+        analyzedFood = JSON.parse(jsonMatch[0])
 
         document.getElementById('result-name').textContent    = '🍽️ ' + analyzedFood.name
         document.getElementById('result-cal').textContent     = '🔥 ' + analyzedFood.calories + ' kcal'
