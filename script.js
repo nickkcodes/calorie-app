@@ -136,8 +136,9 @@ function addFoodToLog(foodName, calories, carbs, protein, fat) {
     detailItem.textContent = foodName + ' — ' + calories + ' kcal'
     document.getElementById('detail-' + meal).appendChild(detailItem)
 
-    const list  = document.getElementById('list-' + meal)
-    const arrow = document.getElementById('arrow-' + meal)
+    const detailList  = document.getElementById('detail-' + meal)
+    const emptyMsg    = document.getElementById('empty-' + meal)
+    if (emptyMsg) emptyMsg.style.display = 'none'
     if (!list.classList.contains('open')) {
         list.classList.add('open')
         arrow.classList.add('open')
@@ -230,7 +231,7 @@ updateWeeklyChart()
 updateMacros()
 
 // ── Scanner ────────────────────────────────────────────
-const GEMINI_API_KEY = 'AIzaSyCqhcwiWqtrvbqblWWctZNnmkOTgGyrv-Q'
+const GEMINI_API_KEY = 'PASTE_YOUR_GEMINI_KEY_HERE'
 
 const fabBtn         = document.getElementById('fab-btn')
 const scannerOverlay = document.getElementById('scanner-overlay')

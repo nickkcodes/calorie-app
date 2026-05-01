@@ -239,23 +239,57 @@
 
                         <div class="meals-detail">
 
-                            <div class="meal-detail-section">
-                                <h3>🌅 Breakfast</h3>
-                                <ul id="detail-breakfast"></ul>
-                                <p class="meal-total">Total: <span id="detail-kcal-breakfast">0</span> kcal</p>
+                            <div class="meal-card" id="meal-card-breakfast">
+                                <div class="meal-card-header" onclick="toggleMealCard('breakfast')">
+                                    <div class="meal-card-left">
+                                        <span class="meal-card-icon">🌅</span>
+                                        <div>
+                                            <p class="meal-card-name">Breakfast</p>
+                                            <p class="meal-card-kcal" id="card-kcal-breakfast">0 kcal</p>
+                                        </div>
+                                    </div>
+                                    <span class="meal-card-arrow" id="card-arrow-breakfast">▼</span>
+                                </div>
+                                <div class="meal-card-body" id="card-body-breakfast">
+                                    <ul class="food-item-list" id="detail-breakfast"></ul>
+                                    <p class="meal-empty" id="empty-breakfast">No food logged yet</p>
+                                </div>
                             </div>
 
-                            <div class="meal-detail-section">
-                                <h3>🌞 Lunch</h3>
-                                <ul id="detail-lunch"></ul>
-                                <p class="meal-total">Total: <span id="detail-kcal-lunch">0</span> kcal</p>
+                            <div class="meal-card" id="meal-card-lunch">
+                                <div class="meal-card-header" onclick="toggleMealCard('lunch')">
+                                    <div class="meal-card-left">
+                                        <span class="meal-card-icon">🌞</span>
+                                        <div>
+                                            <p class="meal-card-name">Breakfast</p>
+                                            <p class="meal-card-kcal" id="card-kcal-lunch">0 kcal</p>
+                                        </div>
+                                    </div>
+                                    <span class="meal-card-arrow" id="card-arrow-lunch">▼</span>
+                                </div>
+                                <div class="meal-card-body" id="card-body-lunch">
+                                    <ul class="food-item-list" id="detail-lunch"></ul>
+                                    <p class="meal-empty" id="empty-lunch">No food logged yet</p>
+                                </div>
                             </div>
 
-                            <div class="meal-detail-section">
-                                <h3>🌙 Dinner</h3>
-                                <ul id="detail-dinner"></ul>
-                                <p class="meal-total">Total: <span id="detail-kcal-dinner">0</span> kcal</p>
+                            <div class="meal-card" id="meal-card-dinner">
+                                <div class="meal-card-header" onclick="toggleMealCard('dinner')">
+                                    <div class="meal-card-left">
+                                        <span class="meal-card-icon">🌙</span>
+                                        <div>
+                                            <p class="meal-card-name">Dinner</p>
+                                            <p class="meal-card-kcal" id="card-kcal-dinner">0 kcal</p>
+                                        </div>
+                                    </div>
+                                    <span class="meal-card-arrow" id="card-arrow-dinner">▼</span>
+                                </div>
+                                <div class="meal-card-body" id="card-body-dinner">
+                                    <ul class="food-item-list" id="detail-dinner"></ul>
+                                    <p class="meal-empty" id="empty-dinner">No food logged yet</p>
+                                </div>
                             </div>
+                            
                         </div>
                 </div>
             </div>

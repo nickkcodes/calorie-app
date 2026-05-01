@@ -390,7 +390,7 @@ button.secondary:hover {
     left: 0;
     width: 100%;
     height: 0%;
-    background: linear-gradient(to top, #939393, #445a45);
+    background: linear-gradient(to top, #191616, #000000);
     transition: height 0.8s ease;
 }
 
@@ -1141,4 +1141,157 @@ body.dark .fab-btn {
 
 body.dark .scanner-title {
     color: #81c784;
+}
+
+.meals-detail {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 80px;
+}
+
+.meal-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.meal-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+}
+
+.meal-card-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.meal-card-icon {
+    font-size: 28px;
+}
+
+.meal-card-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+}
+
+.meal-card-kcal {
+    font-size: 12px;
+    color: #4CAF50;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.meal-card-arrow {
+    font-size: 11px;
+    color: #bbb;
+    transition: transform 0.3s ease;
+}
+
+.meal-card-arrow.open {
+    transform: rotate(180deg);
+}
+
+.meal-card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    border-top: 1px solid transparent;
+}
+
+.meal-card-body.open {
+    max-height: 500px;
+    border-top: 1px solid #f5f5f5;
+}
+
+.food-item-list {
+    list-style: none;
+    padding: 0 16px;
+}
+
+.food-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.food-item:last-child {
+    border-bottom: none;
+}
+
+.food-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.food-item-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.food-item-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.food-item-cal {
+    font-size: 13px;
+    font-weight: 700;
+    color: #4CAF50;
+}
+
+.food-item-delete {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 6px;
+    color: #ccc;
+    width: auto;
+    margin: 0;
+    transition: color 0.2s;
+}
+
+.food-item-delete:hover {
+    color: #e63946;
+    background: #fff0f0;
+}
+
+/* macro chips */
+.food-item-macros {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.macro-chip {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.chip-carbs   { background: #fff8e1; color: #f9a825; }
+.chip-protein { background: #e8eafe; color: #4361ee; }
+.chip-fat     { background: #fdecea; color: #e63946; }
+
+/* empty state */
+.meal-empty {
+    text-align: center;
+    color: #ccc;
+    font-size: 13px;
+    padding: 16px;
 }
