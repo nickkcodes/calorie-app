@@ -367,3 +367,60 @@ logBtn.addEventListener('click', function() {
     )
     closeScanner()
 })
+
+const li = document.createElement('li')
+li.classList.add('food-item')
+li.innerHTML = `
+    <div class="food-item-top">
+        <span class="food-item-name">${foodName}</span>
+        <div class="food-item-right">
+            <span class="food-item-cal">${calories} kcal</span>
+            <button class="food-item-delete" onclick="deleteFoodItem(this, '${meal}', ${calories}, ${carbs}, ${protein}, ${fat})">🗑️</button>
+        </div>
+    </div>
+    <div class="food-item-macros">
+        <span class="macro-chip chip-carbs">C ${carbs}g</span>
+        <span class="macro-chip chip-protein">P ${protein}g</span>
+        <span class="macro-chip chip-fat">F ${fat}g</span>
+    </div>
+`
+detailList.appendChild(li)
+
+document.getElementById('card-kcal-' + meal).textContent = mealCalories[meal] + ' kcal'
+
+const body  = document.getElementById('card-body-' + meal)
+const arrow = document.getElementById('card-arrow-' + meal)
+if (body && !body.classList.contains('open')) {
+    body.classList.add('open')
+    arrow.classList.add('open')
+}
+
+function toggleMealCard(meal) {
+    const body = document.getElementById('card-body-' + meal)
+    const arrow = document.getElementById('card-arrow-' + meal)
+    body.classList.toggle('open')
+    arrow.classList.toggle('open')
+}
+
+function deleteFoodItem(btn, meal, calories, carbs, protein, fat) {
+    totalCalories        -= calories
+    totalCarbs           -= carbs
+    totalProtein         -= protein
+    totalFat             -= fat
+    mealCalories[meal]   -= calories
+    weeklyData[todayIndex] -= calories
+
+    updateCalorieRing()
+    updateWeeklyChart()
+    updateMacros()
+
+    document.getElementById('card-kcal-' + meal).textContent = mealCalories[meal] + ' kcal'
+    document.getElementById('kcal-' + meal).textContent = mealCalories[meal] + ' kcal'
+
+    btn.closest('.food-item').remove()
+
+    const list = document.getElementById('detail-' + meal)
+    if (list.children.length === 0) {
+        document.getElementById('empty-' + meal).style.display = 'block'
+    }
+}
