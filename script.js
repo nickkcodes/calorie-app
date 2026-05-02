@@ -231,7 +231,7 @@ updateWeeklyChart()
 updateMacros()
 
 // ── Scanner ────────────────────────────────────────────
-const GEMINI_API_KEY = 'AIzaSyAh4QpDxzE3Na3qNIoCNXaZDf_OEEg9CO4'
+const GEMINI_API_KEY = 'AIzaSyB-t_UMJ3-IA5Qw1VCuFulJh6iBGzse-gU'
 
 const fabBtn         = document.getElementById('fab-btn')
 const scannerOverlay = document.getElementById('scanner-overlay')
