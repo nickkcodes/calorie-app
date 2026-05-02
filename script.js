@@ -424,3 +424,12 @@ function deleteFoodItem(btn, meal, calories, carbs, protein, fat) {
         document.getElementById('empty-' + meal).style.display = 'block'
     }
 }
+
+// ── PWA Service Worker ─────────────────────
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js')
+            .then(function() { console.log('SW registered') })
+            .catch(function(err) { console.log('SW failed:', err) })
+    })
+}

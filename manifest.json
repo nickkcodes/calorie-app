@@ -1,0 +1,22 @@
+{
+    "name": "Calorie Tracker",
+    "short_name": "CalTracker",
+    "description": "Track your calories, water and macros",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#f5f5f5",
+    "theme_color": "#2e7d32",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "panda.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "panda.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
