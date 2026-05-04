@@ -342,6 +342,62 @@
             </div>
         </div>
     
+        <!--First Page-->
+        <div class="onboard-overlay" id="onboard-overlay">
+            <div class="onboard-card">
+                <div class="onboard-emoji">🐼</div>
+                <h2 class="onboard-title">Hey there, welcome!</h2>
+                <p class="onboard-sub">Let's set up your profile so we can personalize your calorie goals 💪</p>
+
+                <div class="onboard-form">
+                    <div class="onboard-row">
+                        <div class="onboard-field">
+                            <label>Current Weight</label>
+                            <div class="input-wrap">
+                                <input type="number" id="ob-weight" placeholder="e.g. 65"/>
+                                <span class="input-unit">kg</span>
+                            </div>
+                        </div>
+                        <div class="onboard-field">
+                            <label>Goal Weight</label>
+                            <div class="input-wrap">
+                                <input type="number" id="ob-weight" placeholder="e.g. 58"/>
+                                <span class="input-unit">kg</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="onboard-row">
+                        <div class="onboard-field">
+                            <label>Height</label>
+                            <div class="input-wrap">
+                                <input type="number" id="ob-height" placeholder="e.g. 165"/>
+                                <span class="input-unit">cm</span>
+                            </div>
+                        </div>
+                        <div class="onboard-field">
+                            <label>Age</label>
+                            <div class="input-wrap">
+                                <input type="number" id="ob-age" placeholder="e.g. 16"/>
+                                <span class="input-unit">yrs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="onboard-field">
+                        <label>Gender</label>
+                        <div class="gender-btns">
+                            <button type="button" class="gender-btn" id="btn-male" onclick="selectGender('male')">Male</button>
+                            <button type="button" class="gender-btn" id="btn-female" onclick="selectGender('female')">Female</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="onboard-save" id="onboard-save" onclick="saveOnboarding()">
+                    Let's Go!
+                </button>
+            </div>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>

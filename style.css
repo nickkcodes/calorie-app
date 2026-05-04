@@ -1047,3 +1047,172 @@ button.secondary:hover {
     font-size: 13px;
     padding: 16px;
 }
+
+/*     First Popup      */
+.onboard-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;  height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation-name: fadeIn 0.4s ease;
+}
+
+.onboard-overlay.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.onboard-card {
+    background: white;
+    border-radius: 28px;
+    padding: 28px 24px;
+    width: 340px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: slideUp 0.4s ease;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.30);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+.onboard-emoji {
+    font-size: 48px;
+    text-align: center;
+}
+
+.onboard-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #2e7d32;
+    text-align: center;
+    margin: 0;
+}
+
+.onboard-sub {
+    font-size: 13px;
+    color: #888;
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.onboard-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.onboard-row {
+    display: flex;
+    gap: 10px;
+}
+
+.onboard-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.onboard-field label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrap input {
+    width: 100%;
+    padding: 10px 32px 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+    background: #fafafa;
+    margin: 0;
+}
+
+.input-unit {
+    position: absolute;
+    right: 10px;
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+/* gender shi */
+.gender-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.gender-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background: white;
+    color: #555;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0;
+    width: auto;
+}
+
+.gender-btn:hover {
+    border-color: #4CAF50;
+    background: #f1f8f1;
+    color: #2e7d32;
+}
+
+.gender-btn.selected {
+    border-color: #4CAF50;
+    background: #4CAF50;
+    color: white;
+}
+
+/* save button tye shi */
+.onboard-save {
+    background: linear-gradient(135deg, #2e7d32, #4CAF50);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    margin: 0;
+    transition: opacity 0.2, transform 0.3s;
+    box-shadow: 0 4px 15px rgba(76,175,80,0.4);
+}
+
+.onboard-save:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
