@@ -506,3 +506,16 @@ function saveOnboarding() {
         if (savedWeekly) localStorage.setItem('ct_weekly', savedWeekly)
         return
     }
+
+window.addEventListener("load", () => {
+    const intro = document.getElementById("intro-screen")
+
+    setTimeout(() => {
+        intro.classList.add("intro-hide")
+
+        setTimeout(() => {
+            intro.style.display = "none"
+        }, 600)
+
+    }, 2200) // duration of intro
+})
