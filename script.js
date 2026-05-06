@@ -433,3 +433,76 @@ if ('serviceWorker' in navigator) {
             .catch(function(err) { console.log('SW failed:', err) })
     })
 }
+
+function saveOnboarding() {
+    const weight     = document.getElementById('ob-weight').value
+    const goalWeight = document.getElementById('ob-goal-weight').value
+    const height     = document.getElementById('ob-height').value
+    const age        = document.getElementById('ob-age').value
+
+    if (!weight || !goalWeight || !height || !age || !selectedGender) {
+        alert('Please fill in all fields! 😊')
+        return
+    }
+
+    // save to localStorage
+    localStorage.setItem('ob_weight',      weight)
+    localStorage.setItem('ob_goal_weight', goalWeight)
+    localStorage.setItem('ob_height',      height)
+    localStorage.setItem('ob_age',         age)
+    localStorage.setItem('ob_gender',      selectedGender)
+    localStorage.setItem('ob_done',        'true')
+
+    // calculate personalized calorie goal
+    const w = parseFloat(weight)
+    const h = parseFloat(height)
+    const a = parseFloat(age)
+    let bmr = selectedGender === 'male'
+        ? 10 * w + 6.25 * h - 5 * a + 5
+        : 10 * w + 6.25 * h - 5 * a - 161
+    const tdee = Math.round(bmr * 1.55)
+    const goal = parseFloat(goalWeight)
+    calorieGoal = goal < w ? tdee - 500 : tdee
+
+    document.getElementById('calorie-goal').textContent = calorieGoal
+    updateCalorieRing()
+    updateDailySummary()
+
+    // hide popup
+    const overlay = document.getElementById('onboard-overlay')
+    overlay.style.opacity = '0'
+    overlay.style.transition = 'opacity 0.3s ease'
+    setTimeout(function() {
+        overlay.classList.add('hidden')
+        overlay.style.opacity = ''
+    }, 300)
+}
+
+// new day — reset daily data but keep weekly AND onboarding
+    if (savedDate && savedDate !== today) {
+        const savedWeekly = localStorage.getItem('ct_weekly')
+        
+        // save onboarding data before clearing
+        const obDone   = localStorage.getItem('ob_done')
+        const obWeight = localStorage.getItem('ob_weight')
+        const obGoal   = localStorage.getItem('ob_goal_weight')
+        const obHeight = localStorage.getItem('ob_height')
+        const obAge    = localStorage.getItem('ob_age')
+        const obGender = localStorage.getItem('ob_gender')
+
+        localStorage.clear()
+
+        // restore onboarding
+        if (obDone) {
+            localStorage.setItem('ob_done',        obDone)
+            localStorage.setItem('ob_weight',      obWeight)
+            localStorage.setItem('ob_goal_weight', obGoal)
+            localStorage.setItem('ob_height',      obHeight)
+            localStorage.setItem('ob_age',         obAge)
+            localStorage.setItem('ob_gender',      obGender)
+        }
+
+        // restore weekly
+        if (savedWeekly) localStorage.setItem('ct_weekly', savedWeekly)
+        return
+    }
