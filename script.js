@@ -510,6 +510,8 @@ function saveOnboarding() {
 window.addEventListener("load", () => {
     const intro = document.getElementById("intro-screen")
 
+    if (!intro) return //
+
     setTimeout(() => {
         intro.classList.add("intro-hide")
 

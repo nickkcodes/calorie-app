@@ -1229,7 +1229,6 @@ button.secondary:hover {
     align-items: center;
     justify-content: center;
     z-index: 999999;
-    animation: introFade 1s ease forwards;
 }
 
 .intro-content {
@@ -1317,3 +1316,26 @@ button.secondary:hover {
         transform: scale(1.1);
     }
 }
+
+.intro-panda-wrap {
+    position: relative;
+    width: 120px;
+    margin: 0 auto 20px;
+    animation: floaty 3s ease-in-out infinite;
+}
+
+.intro-panda {
+    width: 100%;
+    display: block;
+}
+
+.eye {
+    position: absolute;
+    width: 10px;
+    height: 12px;
+    background-color: black;
+    border-radius: 50%;
+    top: 42%;
+    animation: blink 4s infinite;
+}
+
