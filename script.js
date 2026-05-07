@@ -1,3 +1,17 @@
+// ── Intro screen ───────────────────────────
+(function showIntro() {
+    const intro = document.getElementById('intro-screen')
+    if (!intro) return
+
+    // show for 2.5 seconds then fade out
+    setTimeout(function() {
+        intro.classList.add('hide')
+        setTimeout(function() {
+            intro.classList.add('gone')
+        }, 600)
+    }, 2500)
+})()
+
 // ── State ──────────────────────────────────────────────
 let totalCalories = 0
 let calorieGoal   = 2000
