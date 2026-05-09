@@ -1308,3 +1308,75 @@ button.secondary:hover {
     0%, 100% { background: rgba(255,255,255,0.3); transform: scale(1); }
     50%       { background: white; transform: scale(1.3); }
 }
+
+/* ── Goal celebration ────────────────────── */
+.celebration-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 999998;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.celebration-overlay.show { display: flex; }
+
+.celebration-card {
+    background: white;
+    border-radius: 28px;
+    padding: 32px 24px;
+    width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: celebPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes celebPop {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+.celebration-panda {
+    width: 120px;
+    height: 120px;
+    animation: pandaSpin 0.8s ease forwards;
+}
+
+.celebration-panda img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.celebration-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #2e7d32;
+    margin: 0;
+}
+
+.celebration-msg {
+    font-size: 14px;
+    color: #888;
+    margin: 0;
+}
+
+.celebration-btn {
+    background: linear-gradient(135deg, #2e7d32, #4CAF50);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    width: auto;
+    margin: 8px 0 0;
+    box-shadow: 0 4px 15px rgba(76,175,80,0.4);
+}
