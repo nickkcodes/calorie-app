@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div class="intro-class" id="intro-screen">
+        <div class="intro-screen" id="intro-screen">
             <div class="intro-content">
                 <div class="intro-panda" id="intro-panda">
                     <img src="panda.png" alt="Nickyy the panda"/>
@@ -376,7 +376,7 @@
                         <div class="onboard-field">
                             <label>Goal Weight</label>
                             <div class="input-wrap">
-                                <input type="number" id="ob-weight" placeholder="e.g. 58"/>
+                                <input type="number" id="ob-goal-weight" placeholder="e.g. 58"/>
                                 <span class="input-unit">kg</span>
                             </div>
                         </div>
@@ -411,6 +411,65 @@
                 <button class="onboard-save" id="onboard-save" onclick="saveOnboarding()">
                     Let's Go!
                 </button>
+            </div>
+        </div>
+        <div class="streak-banner" id="streak-banner">
+            <span class="streak-fire">🔥</span>
+            <div class="streak-info">
+                <p class="streak-number" id="streak-number">No streak yet</p>
+                <p class="streak-sub">Hit your goal to start one!</p>
+            </div>
+        </div>
+
+        <button class="settings-btn" id="settings-btn" onclick="openSettings()">⚙️</button>
+
+        <div class="settings-overlay" id="settings-overlay">
+            <div class="settings-sheet" id="settings-sheet">
+                <div class="scanner-handle"></div>
+                <h2 class="scanner-title"></h2>
+                <div class="settins-section">
+                    <h3 class="settings-label">Your Profile</h3>
+                    <div class="settings-row">
+                        <label>Current Weight (kg)</label>
+                        <input type="number" id="set-weight" class="settings-input"/>
+                    </div>
+                    <div class="settings-row">
+                        <label>Goal Weight (kg)</label>
+                        <input type="number" id="set-goal-weight" class="settings-input"/>
+                    </div>
+                    <div class="settings-row">
+                        <label>Height (cm)</label>
+                        <input type="number" id="set-height" class="settings-input"/>
+                    </div>
+                    <div class="settings-row">
+                        <label>Age</label>
+                        <input type="number" id="set-age" class="settings-input"/>
+                    </div>
+                    <div class="settings-row">
+                        <label>Gender</label>
+                        <div class="gender-btns">
+                            <button type="button" class="gender-btn" id="set-btn-male"  onclick="setGender('male')">👦 Male</button>
+                            <button type="button" class="gender-btn" id="set-btn-female" onclick="setGender('female')">👧 Female</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3 class="settings-label">App</h3>
+                    <button class="settings-danger" onclick="resetAllData()">🗑️ Reset All Data</button>
+                </div>
+                <button class="onboard-save" onclick="saveSettings()">Save Changes ✅</button>
+                <button class="close-btn" onclick="closeSettings()">✕ Close</button>
+            </div>
+        </div>
+
+        <div class="celebration-overlay" id="celebration-overlay">
+            <div class="celebration-card">
+                <div class="celebration-card">
+                    <img src="panda.png" alt="Nickyy celebrating"/>
+                </div>
+                <h2 class="celebration-title">Goal Reached! 🎉</h2>
+                <p class="celebration-msg" id="celebration-msg">Nickyy is so proud of you!</p>
+                <button class="celebration-btn" onclick="closeCelebration()">Woohoo! 🎊</button>
             </div>
         </div>
         <script src="script.js"></script>
