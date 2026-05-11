@@ -4,7 +4,12 @@
     if (!intro) return
     setTimeout(function() {
         intro.classList.add('hide')
-        setTimeout(function() { intro.classList.add('gone') }, 600)
+        setTimeout(function() { 
+            intro.classList.add('gone')
+            // Show settings button after intro
+            const settingsBtn = document.getElementById('settings-btn')
+            if (settingsBtn) settingsBtn.style.display = 'flex'
+        }, 600)
     }, 2500)
 })()
 

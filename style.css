@@ -1390,6 +1390,30 @@ button.secondary:hover {
     display: none;         
     align-items: flex-end;
     justify-content: center;
+    pointer-events: auto;
+}
+
+.settings-overlay.open {
+    display: flex;
+}
+
+.settings-sheet {
+    background: white;
+    width: 100%;
+    max-width: 390px;
+    border-radius: 24px 24px 0 0;
+    padding: 16px 20px 40px;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 10001;
+    pointer-events: auto;
+}
+
+.settings-sheet.open {
+    transform: translateY(0);
 }
 
 .settings-btn {
@@ -1403,11 +1427,67 @@ button.secondary:hover {
     border: none;
     font-size: 20px;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 999999;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     padding: 0;
     margin: 0;
+}
+
+/* Settings Form Styles */
+.settins-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.settings-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2e7d32;
+    margin-bottom: 8px;
+}
+
+.settings-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.settings-row label {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+.settings-input {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.settings-input:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.settings-danger {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.settings-danger:hover {
+    background: #ff5252;
 }
