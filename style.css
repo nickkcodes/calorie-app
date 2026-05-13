@@ -1528,3 +1528,34 @@ button.secondary:hover {
 }
 
 .shop-overlay.open { display: flex; }
+
+.shop-sheet {
+    background: white;
+    width: 100%;
+    max-width: 390px;
+    border-radius: 24px 24px 0 0;
+    padding: 16px 20px 40px;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.shop-sheet.open { transform: translateY(0); }
+
+/* ── Shop header ─────────────────────────── */
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shop-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #2e7d32;
+    margin: 0;
+}
