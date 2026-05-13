@@ -42,7 +42,7 @@
                         </svg>
                         <div class="circle-text">
                             <span id="calories-eaten">0</span>
-                            <small>of <span id="calorie-goal">2000</span> kcal</small>
+                            <small>of <span id="calorie-goal">200</span> kcal</small>
                         </div>
                     </div>
 
@@ -132,15 +132,14 @@
                             </div>
                         </div>
 
-
-                        <div class="summary-item">
+                         <div class="summary-item">
                             <span>Status</span>
                             <b id="day-status">On Track</b>
-                        </div>
-                    
+                        </div>                    
+                        
                         <div class="summary-item">
                             <span>Calories Left</span>
-                            <b id="calories-left-summary">2000 kcal</b>
+                            <b id="calories-left-summary">200 kcal</b>
                         </div>
                     
                         <div class="summary-item">
@@ -162,10 +161,11 @@
                             <span>Water</span>
                             <b id="water-status">0 / 8</b>
                         </div>
-                    </div>
+                    </div>                  
 
                     <button id="add-food-btn">+ Analyze Food</button>
                 </div>
+
 
                 <div class="page" id="page-water">
                     <h1>Water Intake</h1>
@@ -478,6 +478,93 @@
                 <h2 class="celebration-title">Goal Reached! 🎉</h2>
                 <p class="celebration-msg" id="celebration-msg">Nickyy is so proud of you!</p>
                 <button class="celebration-btn" onclick="closeCelebration()">Woohoo! 🎊</button>
+            </div>
+        </div>
+
+        <button class="shop-btn" id="shot-btn" onclick="openShop()">🛒</button>
+
+        <div class="shop-overlay" id="shop-overlay">
+            <div class="shop-sheet" id="shop-sheet">
+                <div class="scanner-handle"></div>
+                <div class="shop-header">
+                    <h2 class="shop-title">🐼 Panda Shop</h2>
+                    <div class="shop-points-badge">
+                        <span>🪙</span>
+                        <span id="shop-points-display">0 points</span>
+                    </div>
+                </div>
+
+                <div class="shop-panda-review">
+                    <img src="panda.png" id="shop-panda-img" alt="Nickyy" class="shop-panda-base"/>
+                    <img src="" id="shop-equipped-overlay" class="shop-item-overlay" style="display: none;"/>
+                    <div class="shop-equipped-emoji" id="shop-equipped-emoji"></div>
+                </div>
+                <p class="shop-equipped-emoji" id="shop-equipped-label">No items equipped</p>
+
+                <div class="shop-items">
+                    <div class="shop-item" id="item-shades">
+                        <div class="shop-item-icon">😎</div>
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">Cool Shades</p>
+                            <p class="shop-item-desc">Nickyy can rizz up the huzz 😎</p>
+                        </div>
+                        <div class="shop-item-right">
+                            <span class="shop-item-price" id="price-shades">🪙 50</span>
+                            <button class="shop-buy-btn" id="btn-shades" onclick="butItem('shades', 50, '😎')">Buy</button>
+                        </div>
+                    </div>
+
+                    <div class="shop-item" id="item-crown">
+                        <div class="shop-item-icon">👑</div>
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">Golden Crown</p>
+                            <p class="shop-item-desc">If Nickyy became the king? Will you become the queen?</p>
+                        </div>
+                        <div class="shop-item-right">
+                            <span class="shop-item-price" id="price-crown">🪙 150</span>
+                            <button class="shop-buy-btn" id="btn-crown" onclick="buyItem('crown', 150, '👑')">Buy</button>
+                        </div>
+                    </div>
+
+                    <div class="shop-item" id="item-hoodie">
+                        <div class="shop-item-icon">🧥</div>
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">Hoodie</p>
+                            <p class="shop-item-desc">Use my hoodie!(ik you already look good but promise my hoodie will make you look better🧐)</p>
+                        </div>
+                        <div class="shop-item-right">
+                            <span class="shop-item-price" id="price-hoodie">🪙 100</span>
+                            <button class="shop-buy-btn" id="btn-hoodie" onclick="buyItem('hoodie', 100, '🧥')">Buy</button>
+                        </div>
+                    </div>
+
+                    <div class="shop-item" id="item-halo">
+                        <div class="shop-item-icon">😇</div>
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">Angel Halo</p>
+                            <p class="shop-item-desc">Saint Nickyy?</p>
+                        </div>
+                        <div class="shop-item-right">
+                            <span class="shop-item-price" id="price-hoodie">🪙 75</span>
+                            <button class="shop-buy-btn" id="btn-halo" onclick="buyItem('hoodie', 75, '😇')">Buy</button>
+                        </div>
+                    </div>
+
+                    <div class="shop-item" id="item-fire">
+                        <div class="shop-item-icon">🔥</div>
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">Flame Aura</p>
+                            <p class="shop-item-desc">Stop aura farming Nickyy</p>
+                        </div>
+                        <div class="shop-item-right">
+                            <span class="shop-item-price" id="price=fire">🪙 200</span>
+                            <button class="shop-buy-btn" id="btn-halo" onclick="buyItem('fire', 200, '🔥')">Buy</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="close-btn" onclick="closeShop()">✕ Close</button>
             </div>
         </div>
         <script src="script.js"></script>
