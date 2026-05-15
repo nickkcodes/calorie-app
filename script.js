@@ -769,6 +769,26 @@ logBtn.addEventListener('click', function() {
     closeScanner()
 })
 
+// ── Panda Shop ──────────────────────────────
+let pandaPoints = 0
+let ownedItems  = []
+let equippedItem = ''
+
+const shopItems = {
+    shades:  { name: 'Cool Shades',   price: 50,  emoji: '😎', position: 'middle' },
+    crown:   { name: 'Golden Crown',  price: 150, emoji: '👑', position: 'top' },
+    hoodie:  { name: 'Baguio Hoodie', price: 300, emoji: '🧥', position: 'bottom' },
+    halo:    { name: 'Angel Halo',    price: 75,  emoji: '😇', position: 'top' },
+    fire:    { name: 'Flame Aura',    price: 200, emoji: '🔥', position: 'bottom' }
+}
+
+function loadShopData() {
+    pandaPoints  = parseInt(localStorage.getItem('panda_points')) || 0
+    ownedItems   = JSON.parse(localStorage.getItem('owned_items') || '[]')
+    equippedItem = localStorage.getItem('equipped_item') || ''
+    updateShopUI()
+}
+
 // ── Init ───────────────────────────────────
 loadData()
 checkOnboarding()
