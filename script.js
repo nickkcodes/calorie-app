@@ -789,6 +789,27 @@ function loadShopData() {
     updateShopUI()
 }
 
+function saveShopData() {
+    localStorage.setItem('panda_points',  pandaPoints)
+    localStorage.setItem('owned_items',   JSON.stringify(ownedItems))
+    localStorage.setItem('equipped_item', equippedItem)
+}
+
+function openShop() {
+    updateShopUI()
+    const overlay = document.getElementById('shop-overlay')
+    const sheet   = document.getElementById('shop-sheet')
+    overlay.classList.add('open')
+    setTimeout(function() { sheet.classList.add('open') }, 10)
+}
+
+function closeShop() {
+    const overlay = document.getElementById('shop-overlay')
+    const sheet   = document.getElementById('shop-sheet')
+    sheet.classList.remove('open')
+    setTimeout(function() { overlay.classList.remove('open') }, 400)
+}
+
 // ── Init ───────────────────────────────────
 loadData()
 checkOnboarding()
