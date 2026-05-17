@@ -810,6 +810,122 @@ function closeShop() {
     setTimeout(function() { overlay.classList.remove('open') }, 400)
 }
 
+function buyItem(itemId, price, emoji) {
+    if (ownedItems.includes(itemId)) {
+        // already owned — equip it
+        equipItem(itemId)
+        return
+    }
+
+    if (pandaPoints < price) {
+        alert(`You need ${price - pandaPoints} more points to buy this! Keep your streak going 🔥`)
+        return
+    }
+
+    pandaPoints -= price
+    ownedItems.push(itemId)
+    saveShopData()
+    haptic('success')
+    updateShopUI()
+
+    // little celebration
+    const btn = document.getElementById('btn-' + itemId)
+    if (btn) {
+        btn.textContent = '✅ Owned!'
+        setTimeout(function() { updateShopUI() }, 800)
+    }
+}
+
+function equipItem(itemId) {
+    equippedItem = equippedItem === itemId ? '' : itemId  // toggle off if same
+    saveShopData()
+    updateShopUI()
+    haptic('light')
+}
+
+function updateShopUI() {
+    // update points display
+    const pointsEl = document.getElementById('shop-points-display')
+    if (pointsEl) pointsEl.textContent = pandaPoints + ' pts'
+
+    // update panda preview emoji
+    const emojiEl = document.getElementById('shop-equipped-emoji')
+    const labelEl = document.getElementById('shop-equipped-label')
+
+    if (equippedItem && shopItems[equippedItem]) {
+        const item = shopItems[equippedItem]
+        if (emojiEl) emojiEl.textContent = item.emoji
+
+        // position emoji based on item type
+        if (emojiEl) {
+            if (item.position === 'top')    { emojiEl.style.top = '-10px'; emojiEl.style.bottom = '' }
+            if (item.position === 'middle') { emojiEl.style.top = '30px';  emojiEl.style.bottom = '' }
+            if (item.position === 'bottom') { emojiEl.style.top = '';      emojiEl.style.bottom = '-10px' }
+        }
+
+        if (labelEl) labelEl.textContent = item.emoji + ' ' + item.name + ' equipped!'
+    } else {
+        if (emojiEl) emojiEl.textContent = ''
+        if (labelEl) labelEl.textContent = 'No item equipped'
+    }
+
+    // update each item button
+    Object.keys(shopItems).forEach(function(itemId) {
+        const item    = shopItems[itemId]
+        const btn     = document.getElementById('btn-' + itemId)
+        const itemDiv = document.getElementById('item-' + itemId)
+        if (!btn) return
+
+        if (equippedItem === itemId) {
+            btn.textContent = '✅ On'
+            btn.className   = 'shop-buy-btn equipped-btn'
+            if (itemDiv) itemDiv.className = 'shop-item equipped'
+        } else if (ownedItems.includes(itemId)) {
+            btn.textContent = 'Equip'
+            btn.className   = 'shop-buy-btn owned'
+            if (itemDiv) itemDiv.className = 'shop-item owned'
+        } else if (pandaPoints >= item.price) {
+            btn.textContent = 'Buy'
+            btn.className   = 'shop-buy-btn'
+            btn.disabled    = false
+            if (itemDiv) itemDiv.className = 'shop-item'
+        } else {
+            btn.textContent = 'Buy'
+            btn.className   = 'shop-buy-btn'
+            btn.disabled    = true
+            if (itemDiv) itemDiv.className = 'shop-item'
+        }
+    })
+}
+
+// award points when streak updates
+function awardStreakPoints() {
+    const streak    = parseInt(localStorage.getItem('streak_count')) || 0
+    const lastAward = localStorage.getItem('last_points_award')
+    const today     = new Date().toDateString()
+
+    if (streak > 0 && lastAward !== today) {
+        pandaPoints += streak * 10
+        localStorage.setItem('last_points_award', today)
+        saveShopData()
+
+        // show points notification
+        const notif = document.createElement('div')
+        notif.style.cssText = `
+            position: fixed; bottom: 100px; left: 50%;
+            transform: translateX(-50%);
+            background: #2e7d32; color: white;
+            padding: 10px 20px; border-radius: 20px;
+            font-size: 14px; font-weight: 700;
+            z-index: 99999; animation: fadeSlideUp 0.4s ease both;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        `
+        notif.textContent = '🪙 +' + (streak * 10) + ' Panda Points!'
+        document.body.appendChild(notif)
+        setTimeout(function() { notif.remove() }, 3000)
+    }
+}
+
 // ── Init ───────────────────────────────────
 loadData()
 checkOnboarding()
