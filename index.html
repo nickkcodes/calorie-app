@@ -7,15 +7,17 @@
         <meta name="theme-color" content="#2e7d32">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
-        <meta name="apple-mobile-web-app-title" content="CalTrack">
+        <meta name="apple-mobile-web-app-title" content="NutriPanda">
         <link rel="apple-touch-icon" href="panda.png">
-        <title>Calorie Tracker</title>
+        <title>NutriPanda</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+
+        <!-- ── Intro ── -->
         <div class="intro-screen" id="intro-screen">
             <div class="intro-content">
-                <div class="intro-panda" id="intro-panda">
+                <div class="intro-panda">
                     <img src="panda.png" alt="Nickyy the panda"/>
                 </div>
                 <div class="intro-text">
@@ -28,10 +30,11 @@
             </div>
         </div>
 
+        <!-- ── App ── -->
         <div class="app">
-
             <div class="slider" id="slider">
 
+                <!-- PAGE 1: CALORIES -->
                 <div class="page" id="page-calories">
                     <h1>Calories</h1>
 
@@ -42,88 +45,63 @@
                         </svg>
                         <div class="circle-text">
                             <span id="calories-eaten">0</span>
-                            <small>of <span id="calorie-goal">200</span> kcal</small>
+                            <small>of <span id="calorie-goal">2000</span> kcal</small>
                         </div>
                     </div>
 
                     <div class="log-section">
                         <h2>Today's Log</h2>
-
                         <div class="meal" id="meal-breakfast">
                             <div class="meal-header" onclick="toggleMeal('breakfast')">
                                 <span>🌅 Breakfast</span>
                                 <span class="meal-kcal" id="kcal-breakfast">0 kcal</span>
                                 <span class="meal-arrow" id="arrow-breakfast">▼</span>
                             </div>
-                        <ul class="meal-list" id="list-breakfast"></ul>
-                    </div>
-
-                    <div class="meal" id="meal-lunch">
-                        <div class="meal-header" onclick="toggleMeal('lunch')">
-                            <span>🌞 Lunch</span>
-                            <span class="meal-kcal" id="kcal-lunch">0 kcal</span>
-                            <span class="meal-arrow" id="arrow-lunch">▼</span>
+                            <ul class="meal-list" id="list-breakfast"></ul>
                         </div>
-                        <ul class="meal-list" id="list-lunch"></ul>
-                    </div>
-
-                    <div class="meal" id="meal-dinner">
-                        <div class="meal-header" onclick="toggleMeal('dinner')">
-                            <span>🌙 Dinner</span>
-                            <span class="meal-kcal" id="kcal-dinner">0 kcal</span>
-                            <span class="meal-arrow" id="arrow-dinner">▼</span>
+                        <div class="meal" id="meal-lunch">
+                            <div class="meal-header" onclick="toggleMeal('lunch')">
+                                <span>🌞 Lunch</span>
+                                <span class="meal-kcal" id="kcal-lunch">0 kcal</span>
+                                <span class="meal-arrow" id="arrow-lunch">▼</span>
+                            </div>
+                            <ul class="meal-list" id="list-lunch"></ul>
                         </div>
-                        <ul class="meal-list" id="list-dinner"></ul>
+                        <div class="meal" id="meal-dinner">
+                            <div class="meal-header" onclick="toggleMeal('dinner')">
+                                <span>🌙 Dinner</span>
+                                <span class="meal-kcal" id="kcal-dinner">0 kcal</span>
+                                <span class="meal-arrow" id="arrow-dinner">▼</span>
+                            </div>
+                            <ul class="meal-list" id="list-dinner"></ul>
+                        </div>
                     </div>
-                </div>
 
                     <div class="weekly-chart">
                         <h2>This Week</h2>
                         <div class="chart-area">
                             <div class="goal-line"></div>
                             <div class="bars" id="bars">
-                                <div class="bar-group">
-                                    <div class="bar" id="bar-0"></div>
-                                    <span>Mon</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bar" id="bar-1"></div>
-                                    <span>Tue</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bar" id="bar-2"></div>
-                                    <span>Wed</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bar" id="bar-3"></div>
-                                    <span>Thu</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bar" id="bar-4"></div>
-                                    <span>Fri</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bar" id="bar-5"></div>
-                                    <span>Sat</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bar" id="bar-6"></div>
-                                    <span>Sun</span>
-                                </div>
+                                <div class="bar-group"><div class="bar" id="bar-0"></div><span>Mon</span></div>
+                                <div class="bar-group"><div class="bar" id="bar-1"></div><span>Tue</span></div>
+                                <div class="bar-group"><div class="bar" id="bar-2"></div><span>Wed</span></div>
+                                <div class="bar-group"><div class="bar" id="bar-3"></div><span>Thu</span></div>
+                                <div class="bar-group"><div class="bar" id="bar-4"></div><span>Fri</span></div>
+                                <div class="bar-group"><div class="bar" id="bar-5"></div><span>Sat</span></div>
+                                <div class="bar-group"><div class="bar" id="bar-6"></div><span>Sun</span></div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Daily Summary - ONE only -->
                     <div class="daily-summary">
-                        
                         <h2>Daily Summary</h2>
-                        <div class="summary-item"><span>Status</span><b id="day-status">On Track</b></div>
+                        <div class="summary-item"><span>Status</span><b id="day-status">Not started yet</b></div>
                         <div class="summary-item"><span>Calories Left</span><b id="calories-left-summary">2000 kcal</b></div>
-                        <div class="summary-item"><span>Protein</span><b id="protein-status">On Track</b></div>
-                        <div class="summary-item"><span>Carbs</span><b id="carbs-status">On Track</b></div>
-                        <div class="summary-item"><span>Fat</span><b id="fat-status">On Track</b></div>
+                        <div class="summary-item"><span>Protein</span><b id="protein-status">0g / 65g</b></div>
+                        <div class="summary-item"><span>Carbs</span><b id="carbs-status">0g / 163g</b></div>
+                        <div class="summary-item"><span>Fat</span><b id="fat-status">0g / 43g</b></div>
                         <div class="summary-item"><span>Water</span><b id="water-status">0 / 8</b></div>
-
                         <div class="streak-banner" id="streak-banner">
                             <span class="streak-fire">🔥</span>
                             <div class="streak-info">
@@ -131,117 +109,67 @@
                                 <p class="streak-sub">Hit your goal to start one!</p>
                             </div>
                         </div>
-
-                         <div class="summary-item">
-                            <span>Status</span>
-                            <b id="day-status">On Track</b>
-                        </div>                    
-                        
-                        <div class="summary-item">
-                            <span>Calories Left</span>
-                            <b id="calories-left-summary">200 kcal</b>
-                        </div>
-                    
-                        <div class="summary-item">
-                            <span>Protein</span>
-                            <b id="protein-status">On Track</b>
-                        </div>
-                    
-                        <div class="summary-item">
-                            <span>Carbs</span>
-                            <b id="carbs-status">On Track</b>
-                        </div>
-                    
-                        <div class="summary-item">
-                            <span>Fat</span>
-                            <b id="fat-status">On Track</b>
-                        </div>
-                    
-                        <div class="summary-item">
-                            <span>Water</span>
-                            <b id="water-status">0 / 8</b>
-                        </div>
-                    </div>                  
+                    </div>
 
                     <button id="add-food-btn">+ Analyze Food</button>
                 </div>
 
-
+                <!-- PAGE 2: WATER -->
                 <div class="page" id="page-water">
                     <h1>Water Intake</h1>
                     <div class="hearts-container" id="hearts-container"></div>
 
                     <div class="panda-mask-wrap" id="panda-mask-wrap">
-
                         <div class="panda-mask" id="panda-mask">
                             <div class="panda-base"></div>
                             <div class="panda-water" id="panda-water"></div>
-
                             <div class="panda-wave" id="panda-wave">
                                 <svg viewBox="0 0 200 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0 10 C50 0, 100 20, 150 10 S250 0, 300 10 S350 20, 400 10 L400 20 L0 20 Z" fill="rgba(76,175,80,0.6)"/>
                                     <path d="M0 14 C60 4, 110 24, 160 14 S260 4, 310 14 S360 24, 400 14 L400 20 L0 20 Z" fill="rgba(255,255,255,0.3)"/>
                                 </svg>
-                            </div>         
-                            <img src="panda.png" class="panda-overlay" id="panda-overlay" alt="panda"/>                   
+                            </div>
+                            <img src="panda.png" class="panda-overlay" id="panda-overlay" alt="panda"/>
                         </div>
-
                     </div>
-                
+
                     <p class="water-text"><span id="glasses-drunk">0</span> / 8 glasses</p>
                     <button class="water-btn" id="add-water">+ Add Glass</button>
                     <button class="water-btn secondary" id="remove-water">- Remove Glass</button>
-                    
                 </div>
 
+                <!-- PAGE 3: MEALS -->
                 <div class="page" id="page-meals">
-                        <h1>Meal</h1>
+                    <h1>Meals</h1>
 
-                        <div class="macro-card">
-                            <h2>Macros</h2>
-
-                            <!-- CARBS -->
-                            <div class="macro-row">
+                    <div class="macro-card">
+                        <h2>Macros</h2>
+                        <div class="macro-row">
                             <div class="macro-ring-wrap">
                                 <svg viewBox="0 0 120 120" class="macro-ring">
                                     <circle cx="60" cy="60" r="50" class="ring-bg"/>
                                     <circle cx="60" cy="60" r="50" class="ring-fill carbs" id="ring-carbs"/>
                                 </svg>
-                                <div class="macro-center">
-                                    <span id="carbs-g" style="color:#f9a825">0</span>
-                                </div>
+                                <div class="macro-center"><span id="carbs-g" style="color:#f9a825">0</span></div>
                             </div>
                             <div class="macro-info">
                                 <div class="macro-name" style="color:#f9a825">🟡 Carbs</div>
-                                <div class="macro-bar-wrap">
-                                    <div class="macro-bar carbs-bar" id="carbs-bar"></div> 
-                                </div>
-                                <div class="macro-stats">
-                                    <span id="carbs-left">163g left</span>
-                                    <span class="macro-goal">163g</span>
-                                </div>
+                                <div class="macro-bar-wrap"><div class="macro-bar carbs-bar" id="bar-carbs"></div></div>
+                                <div class="macro-stats"><span id="carbs-left">163g left</span><span class="macro-goal">/163g</span></div>
                             </div>
                         </div>
-                            <!-- PROTEIN -->
-                            <div class="macro-row">
+                        <div class="macro-row">
                             <div class="macro-ring-wrap">
                                 <svg viewBox="0 0 120 120" class="macro-ring">
                                     <circle cx="60" cy="60" r="50" class="ring-bg"/>
                                     <circle cx="60" cy="60" r="50" class="ring-fill protein" id="ring-protein"/>
                                 </svg>
-                                <div class="macro-center">
-                                    <span id="protein-g" style="color:#4361ee">0</span>
-                                </div>
+                                <div class="macro-center"><span id="protein-g" style="color:#4361ee">0</span></div>
                             </div>
                             <div class="macro-info">
                                 <div class="macro-name" style="color:#4361ee">🔵 Protein</div>
-                                <div class="macro-bar-wrap">
-                                    <div class="macro-bar protein-bar" id="bar-protein"></div>
-                                </div>
-                                <div class="macro-stats">
-                                    <span id="protein-left">65g left</span>
-                                    <span class="macro-goal">/65g</span>
-                                </div>
+                                <div class="macro-bar-wrap"><div class="macro-bar protein-bar" id="bar-protein"></div></div>
+                                <div class="macro-stats"><span id="protein-left">65g left</span><span class="macro-goal">/65g</span></div>
                             </div>
                         </div>
                         <div class="macro-row">
@@ -250,97 +178,91 @@
                                     <circle cx="60" cy="60" r="50" class="ring-bg"/>
                                     <circle cx="60" cy="60" r="50" class="ring-fill fat" id="ring-fat"/>
                                 </svg>
-                                <div class="macro-center">
-                                    <span id="fat-g" style="color:#e63946">0</span>
-                                </div>
+                                <div class="macro-center"><span id="fat-g" style="color:#e63946">0</span></div>
                             </div>
                             <div class="macro-info">
                                 <div class="macro-name" style="color:#e63946">🔴 Fat</div>
-                                <div class="macro-bar-wrap">
-                                    <div class="macro-bar fat-bar" id="fat-bar"></div>
-                                </div>
-                                <div class="macro-stats">
-                                    <span id="fat-left">43g left</span>
-                                    <span class="macro-goal">/43g</span>
-                                </div>
+                                <div class="macro-bar-wrap"><div class="macro-bar fat-bar" id="fat-bar"></div></div>
+                                <div class="macro-stats"><span id="fat-left">43g left</span><span class="macro-goal">/43g</span></div>
                             </div>
                         </div>
-
                         <div class="calories-remain">
                             <span>🔥 Calories Remaining</span>
-                            <p id="remain-calories">200g</p>
+                            <b id="remain-calories">2000</b>
                         </div>
-                        
                     </div>
 
-                        <div class="meals-detail">
-
-                            <div class="meal-card" id="meal-card-breakfast">
-                                <div class="meal-card-header" onclick="toggleMealCard('breakfast')">
-                                    <div class="meal-card-left">
-                                        <span class="meal-card-icon">🌅</span>
-                                        <div>
-                                            <p class="meal-card-name">Breakfast</p>
-                                            <p class="meal-card-kcal" id="card-kcal-breakfast">0 kcal</p>
-                                        </div>
+                    <div class="meals-detail">
+                        <div class="meal-card" id="meal-card-breakfast">
+                            <div class="meal-card-header" onclick="toggleMealCard('breakfast')">
+                                <div class="meal-card-left">
+                                    <span class="meal-card-icon">🌅</span>
+                                    <div>
+                                        <p class="meal-card-name">Breakfast</p>
+                                        <p class="meal-card-kcal" id="card-kcal-breakfast">0 kcal</p>
                                     </div>
-                                    <span class="meal-card-arrow" id="card-arrow-breakfast">▼</span>
                                 </div>
-                                <div class="meal-card-body" id="card-body-breakfast">
-                                    <ul class="food-item-list" id="detail-breakfast"></ul>
-                                    <p class="meal-empty" id="empty-breakfast">No food logged yet</p>
-                                </div>
+                                <span class="meal-card-arrow" id="card-arrow-breakfast">▼</span>
                             </div>
-
-                            <div class="meal-card" id="meal-card-lunch">
-                                <div class="meal-card-header" onclick="toggleMealCard('lunch')">
-                                    <div class="meal-card-left">
-                                        <span class="meal-card-icon">🌞</span>
-                                        <div>
-                                            <p class="meal-card-name">Breakfast</p>
-                                            <p class="meal-card-kcal" id="card-kcal-lunch">0 kcal</p>
-                                        </div>
-                                    </div>
-                                    <span class="meal-card-arrow" id="card-arrow-lunch">▼</span>
-                                </div>
-                                <div class="meal-card-body" id="card-body-lunch">
-                                    <ul class="food-item-list" id="detail-lunch"></ul>
-                                    <p class="meal-empty" id="empty-lunch">No food logged yet</p>
-                                </div>
+                            <div class="meal-card-body" id="card-body-breakfast">
+                                <ul class="food-item-list" id="detail-breakfast"></ul>
+                                <p class="meal-empty" id="empty-breakfast">No food logged yet</p>
                             </div>
-
-                            <div class="meal-card" id="meal-card-dinner">
-                                <div class="meal-card-header" onclick="toggleMealCard('dinner')">
-                                    <div class="meal-card-left">
-                                        <span class="meal-card-icon">🌙</span>
-                                        <div>
-                                            <p class="meal-card-name">Dinner</p>
-                                            <p class="meal-card-kcal" id="card-kcal-dinner">0 kcal</p>
-                                        </div>
-                                    </div>
-                                    <span class="meal-card-arrow" id="card-arrow-dinner">▼</span>
-                                </div>
-                                <div class="meal-card-body" id="card-body-dinner">
-                                    <ul class="food-item-list" id="detail-dinner"></ul>
-                                    <p class="meal-empty" id="empty-dinner">No food logged yet</p>
-                                </div>
-                            </div>
-                            
                         </div>
+                        <div class="meal-card" id="meal-card-lunch">
+                            <div class="meal-card-header" onclick="toggleMealCard('lunch')">
+                                <div class="meal-card-left">
+                                    <span class="meal-card-icon">🌞</span>
+                                    <div>
+                                        <p class="meal-card-name">Lunch</p>
+                                        <p class="meal-card-kcal" id="card-kcal-lunch">0 kcal</p>
+                                    </div>
+                                </div>
+                                <span class="meal-card-arrow" id="card-arrow-lunch">▼</span>
+                            </div>
+                            <div class="meal-card-body" id="card-body-lunch">
+                                <ul class="food-item-list" id="detail-lunch"></ul>
+                                <p class="meal-empty" id="empty-lunch">No food logged yet</p>
+                            </div>
+                        </div>
+                        <div class="meal-card" id="meal-card-dinner">
+                            <div class="meal-card-header" onclick="toggleMealCard('dinner')">
+                                <div class="meal-card-left">
+                                    <span class="meal-card-icon">🌙</span>
+                                    <div>
+                                        <p class="meal-card-name">Dinner</p>
+                                        <p class="meal-card-kcal" id="card-kcal-dinner">0 kcal</p>
+                                    </div>
+                                </div>
+                                <span class="meal-card-arrow" id="card-arrow-dinner">▼</span>
+                            </div>
+                            <div class="meal-card-body" id="card-body-dinner">
+                                <ul class="food-item-list" id="detail-dinner"></ul>
+                                <p class="meal-empty" id="empty-dinner">No food logged yet</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
+
+        <!-- ── Dots ── -->
         <div class="dots">
             <span class="dot active" id="dot-1"></span>
             <span class="dot" id="dot-2"></span>
             <span class="dot" id="dot-3"></span>
         </div>
+
+        <!-- ── FAB ── -->
         <button class="fab-btn" id="fab-btn">+</button>
+
+        <!-- ── Scanner ── -->
         <div class="scanner-overlay" id="scanner-overlay">
-        <div class="scanner-sheet" id="scanner-sheet">
-            <div class="scanner-handle"></div>
-            <h2 class="scanner-title"> What did you eat?</h2>
-            <div class="camera-wrap" id="camera-wrap">
+            <div class="scanner-sheet" id="scanner-sheet">
+                <div class="scanner-handle"></div>
+                <h2 class="scanner-title">🍽️ What did you eat? <span id="scan-count-display" style="font-size:12px;color:#aaa;font-weight:400"></span></h2>
+                <div class="camera-wrap" id="camera-wrap">
                     <div class="camera-placeholder" id="camera-placeholder">
                         <span>📷</span>
                         <p>Take a photo of your food</p>
@@ -349,13 +271,11 @@
                     <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none"/>
                     <button class="camera-btn" id="camera-btn">📷 Take Photo</button>
                 </div>
-                <div class="scanner-divider">
-                    <span>or</span>
-                </div>
+                <div class="scanner-divider"><span>or</span></div>
                 <div class="text-wrap">
-                    <input type="text" id="food-input" class="food-input" placeholder="e.g chicken rice, 2 eggs and toast..."/>
+                    <input type="text" id="food-input" class="food-input" placeholder="e.g. chicken rice, 2 eggs..."/>
                 </div>
-                <button class="analyze-btn" id="analyze-btn"> Analyze Food</button>
+                <button class="analyze-btn" id="analyze-btn">✨ Analyze Food</button>
                 <div class="result-wrap" id="result-wrap" style="display:none">
                     <div class="result-card">
                         <p class="result-name" id="result-name"></p>
@@ -366,19 +286,18 @@
                             <span class="result-fat" id="result-fat"></span>
                         </div>
                     </div>
-                    <button class="log-btn" id="log-btn">Log This Food</button>
+                    <button class="log-btn" id="log-btn">✅ Log This Food</button>
                 </div>
                 <button class="close-btn" id="close-btn">✕ Close</button>
             </div>
         </div>
-    
-        <!--First Page-->
+
+        <!-- ── Onboarding ── -->
         <div class="onboard-overlay" id="onboard-overlay">
             <div class="onboard-card">
                 <div class="onboard-emoji">🐼</div>
                 <h2 class="onboard-title">Hey there, welcome!</h2>
                 <p class="onboard-sub">Let's set up your profile so we can personalize your calorie goals 💪</p>
-
                 <div class="onboard-form">
                     <div class="onboard-row">
                         <div class="onboard-field">
@@ -396,7 +315,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="onboard-row">
                         <div class="onboard-field">
                             <label>Height</label>
@@ -413,29 +331,30 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="onboard-field">
                         <label>Gender</label>
                         <div class="gender-btns">
-                            <button type="button" class="gender-btn" id="btn-male" onclick="selectGender('male')">Male</button>
-                            <button type="button" class="gender-btn" id="btn-female" onclick="selectGender('female')">Female</button>
+                            <button type="button" class="gender-btn" id="btn-male" onclick="selectGender('male')">👦 Male</button>
+                            <button type="button" class="gender-btn" id="btn-female" onclick="selectGender('female')">👧 Female</button>
                         </div>
                     </div>
                 </div>
-
-                <button class="onboard-save" id="onboard-save" onclick="saveOnboarding()">
-                    Let's Go!
-                </button>
+                <button class="onboard-save" onclick="saveOnboarding()">Let's Go! 🚀</button>
             </div>
         </div>
 
+        <!-- ── Settings button ── -->
         <button class="settings-btn" id="settings-btn" onclick="openSettings()">⚙️</button>
 
+        <!-- ── Shop button ── -->
+        <button class="shop-btn" id="shop-btn" onclick="openShop()">🛒</button>
+
+        <!-- ── Settings popup ── -->
         <div class="settings-overlay" id="settings-overlay">
             <div class="settings-sheet" id="settings-sheet">
                 <div class="scanner-handle"></div>
-                <h2 class="scanner-title"></h2>
-                <div class="settins-section">
+                <h2 class="scanner-title">⚙️ Settings</h2>
+                <div class="settings-section">
                     <h3 class="settings-label">Your Profile</h3>
                     <div class="settings-row">
                         <label>Current Weight (kg)</label>
@@ -456,7 +375,7 @@
                     <div class="settings-row">
                         <label>Gender</label>
                         <div class="gender-btns">
-                            <button type="button" class="gender-btn" id="set-btn-male"  onclick="setGender('male')">👦 Male</button>
+                            <button type="button" class="gender-btn" id="set-btn-male" onclick="setGender('male')">👦 Male</button>
                             <button type="button" class="gender-btn" id="set-btn-female" onclick="setGender('female')">👧 Female</button>
                         </div>
                     </div>
@@ -470,6 +389,7 @@
             </div>
         </div>
 
+        <!-- ── Celebration ── -->
         <div class="celebration-overlay" id="celebration-overlay">
             <div class="celebration-card">
                 <div class="celebration-panda">
@@ -481,8 +401,7 @@
             </div>
         </div>
 
-        <button class="shop-btn" id="shot-btn" onclick="openShop()">🛒</button>
-
+        <!-- ── Panda Shop ── -->
         <div class="shop-overlay" id="shop-overlay">
             <div class="shop-sheet" id="shop-sheet">
                 <div class="scanner-handle"></div>
@@ -490,16 +409,15 @@
                     <h2 class="shop-title">🐼 Panda Shop</h2>
                     <div class="shop-points-badge">
                         <span>🪙</span>
-                        <span id="shop-points-display">0 points</span>
+                        <span id="shop-points-display">0 pts</span>
                     </div>
                 </div>
 
-                <div class="shop-panda-review">
+                <div class="shop-panda-preview">
                     <img src="panda.png" id="shop-panda-img" alt="Nickyy" class="shop-panda-base"/>
-                    <img src="" id="shop-equipped-overlay" class="shop-item-overlay" style="display: none;"/>
                     <div class="shop-equipped-emoji" id="shop-equipped-emoji"></div>
                 </div>
-                <p class="shop-equipped-emoji" id="shop-equipped-label">No items equipped</p>
+                <p class="shop-equipped-label" id="shop-equipped-label">No item equipped</p>
 
                 <div class="shop-items">
                     <div class="shop-item" id="item-shades">
@@ -509,8 +427,8 @@
                             <p class="shop-item-desc">Nickyy can rizz up the huzz 😎</p>
                         </div>
                         <div class="shop-item-right">
-                            <span class="shop-item-price" id="price-shades">🪙 50</span>
-                            <button class="shop-buy-btn" id="btn-shades" onclick="butItem('shades', 50, '😎')">Buy</button>
+                            <span class="shop-item-price">🪙 50</span>
+                            <button class="shop-buy-btn" id="btn-shades" onclick="buyItem('shades', 50, '😎')">Buy</button>
                         </div>
                     </div>
 
@@ -518,10 +436,10 @@
                         <div class="shop-item-icon">👑</div>
                         <div class="shop-item-info">
                             <p class="shop-item-name">Golden Crown</p>
-                            <p class="shop-item-desc">If Nickyy became the king? Will you become the queen?</p>
+                            <p class="shop-item-desc">If Nickyy became king 👑</p>
                         </div>
                         <div class="shop-item-right">
-                            <span class="shop-item-price" id="price-crown">🪙 150</span>
+                            <span class="shop-item-price">🪙 150</span>
                             <button class="shop-buy-btn" id="btn-crown" onclick="buyItem('crown', 150, '👑')">Buy</button>
                         </div>
                     </div>
@@ -530,10 +448,10 @@
                         <div class="shop-item-icon">🧥</div>
                         <div class="shop-item-info">
                             <p class="shop-item-name">Hoodie</p>
-                            <p class="shop-item-desc">Use my hoodie!(ik you already look good but promise my hoodie will make you look better🧐)</p>
+                            <p class="shop-item-desc">Use my hoodie! 🧐</p>
                         </div>
                         <div class="shop-item-right">
-                            <span class="shop-item-price" id="price-hoodie">🪙 100</span>
+                            <span class="shop-item-price">🪙 100</span>
                             <button class="shop-buy-btn" id="btn-hoodie" onclick="buyItem('hoodie', 100, '🧥')">Buy</button>
                         </div>
                     </div>
@@ -542,11 +460,11 @@
                         <div class="shop-item-icon">😇</div>
                         <div class="shop-item-info">
                             <p class="shop-item-name">Angel Halo</p>
-                            <p class="shop-item-desc">Saint Nickyy?</p>
+                            <p class="shop-item-desc">Saint Nickyy? 😇</p>
                         </div>
                         <div class="shop-item-right">
-                            <span class="shop-item-price" id="price-hoodie">🪙 75</span>
-                            <button class="shop-buy-btn" id="btn-halo" onclick="buyItem('hoodie', 75, '😇')">Buy</button>
+                            <span class="shop-item-price">🪙 75</span>
+                            <button class="shop-buy-btn" id="btn-halo" onclick="buyItem('halo', 75, '😇')">Buy</button>
                         </div>
                     </div>
 
@@ -554,19 +472,19 @@
                         <div class="shop-item-icon">🔥</div>
                         <div class="shop-item-info">
                             <p class="shop-item-name">Flame Aura</p>
-                            <p class="shop-item-desc">Stop aura farming Nickyy</p>
+                            <p class="shop-item-desc">Stop aura farming Nickyy 🔥</p>
                         </div>
                         <div class="shop-item-right">
-                            <span class="shop-item-price" id="price=fire">🪙 200</span>
-                            <button class="shop-buy-btn" id="btn-halo" onclick="buyItem('fire', 200, '🔥')">Buy</button>
+                            <span class="shop-item-price">🪙 200</span>
+                            <button class="shop-buy-btn" id="btn-fire" onclick="buyItem('fire', 200, '🔥')">Buy</button>
                         </div>
                     </div>
-
                 </div>
 
                 <button class="close-btn" onclick="closeShop()">✕ Close</button>
             </div>
         </div>
+
         <script src="script.js"></script>
     </body>
 </html>
